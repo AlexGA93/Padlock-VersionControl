@@ -1,0 +1,17 @@
+{
+  "type":"module",
+  "name": "aws-lambda-padlock-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "scripts": {
+    "invoke": "sls invoke local -f padlock",
+    "deploy": "sls deploy --stage dev --verbose"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^5.12.7"
+  }
+}

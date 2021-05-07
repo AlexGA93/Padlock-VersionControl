@@ -1,0 +1,21 @@
+service: aws-lambda-padlock-api
+frameworkVersion: "2"
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  profile: deploy-padlock # user created in aws
+  lambdaHashingVersion: 20201221
+  stage: dev
+  region: eu-west-3 #Paris
+
+functions:
+  padlock:
+    handler: handler.padlock
+    events:
+      - httpApi:
+          path: /
+          method: get
+      - httpApi:
+          path: /data
+          method: post
