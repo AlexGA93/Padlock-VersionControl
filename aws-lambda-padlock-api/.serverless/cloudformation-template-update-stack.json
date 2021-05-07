@@ -161,7 +161,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/aws-lambda-padlock-api/dev/1620387591381-2021-05-07T11:39:51.381Z/aws-lambda-padlock-api.zip"
+          "S3Key": "serverless/aws-lambda-padlock-api/dev/1620397059339-2021-05-07T14:17:39.339Z/aws-lambda-padlock-api.zip"
         },
         "Handler": "handler.padlock",
         "Runtime": "nodejs14.x",
@@ -179,14 +179,14 @@
         "PadlockLogGroup"
       ]
     },
-    "PadlockLambdaVersionSsCld0D8FuAAGnQLHmrIdahs7CuWna34rFWZj8Hq4o": {
+    "PadlockLambdaVersion2JcLdN7qxBLQJo8VhHOnFdoluqcearW3lT0osuJQ": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "PadlockLambdaFunction"
         },
-        "CodeSha256": "kRcrrr6Ato7+61di/tLsRowYJ5L7lhlkKzLoS2hoRxw="
+        "CodeSha256": "ZdwnXKkLbLXQaN0EFxP7FSOCTQwrGe7wiwTiMkX/d6g="
       }
     },
     "HttpApi": {
@@ -318,7 +318,7 @@
     "PadlockLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "PadlockLambdaVersionSsCld0D8FuAAGnQLHmrIdahs7CuWna34rFWZj8Hq4o"
+        "Ref": "PadlockLambdaVersion2JcLdN7qxBLQJo8VhHOnFdoluqcearW3lT0osuJQ"
       },
       "Export": {
         "Name": "sls-aws-lambda-padlock-api-dev-PadlockLambdaFunctionQualifiedArn"
