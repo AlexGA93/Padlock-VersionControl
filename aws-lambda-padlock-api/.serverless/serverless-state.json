@@ -86,10 +86,10 @@
               }
             }
           },
-          "PadlockLogGroup": {
+          "UsersLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/aws-lambda-padlock-api-dev-padlock"
+              "LogGroupName": "/aws/lambda/aws-lambda-padlock-api-dev-users"
             }
           },
           "IamRoleLambdaExecution": {
@@ -169,18 +169,18 @@
               }
             }
           },
-          "PadlockLambdaFunction": {
+          "UsersLambdaFunction": {
             "Type": "AWS::Lambda::Function",
             "Properties": {
               "Code": {
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/aws-lambda-padlock-api/dev/1620397059339-2021-05-07T14:17:39.339Z/aws-lambda-padlock-api.zip"
+                "S3Key": "serverless/aws-lambda-padlock-api/dev/1620641794483-2021-05-10T10:16:34.483Z/aws-lambda-padlock-api.zip"
               },
-              "Handler": "handler.padlock",
+              "Handler": "routes/api/users.handler",
               "Runtime": "nodejs14.x",
-              "FunctionName": "aws-lambda-padlock-api-dev-padlock",
+              "FunctionName": "aws-lambda-padlock-api-dev-users",
               "MemorySize": 1024,
               "Timeout": 6,
               "Role": {
@@ -191,45 +191,341 @@
               }
             },
             "DependsOn": [
-              "PadlockLogGroup"
+              "UsersLogGroup"
             ]
           },
-          "PadlockLambdaVersion2JcLdN7qxBLQJo8VhHOnFdoluqcearW3lT0osuJQ": {
+          "UsersLambdaVersionHgynfYAeybCnsarnrUfl0jcOO7Qvw49TrSQiAyONGY": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
-                "Ref": "PadlockLambdaFunction"
+                "Ref": "UsersLambdaFunction"
               },
-              "CodeSha256": "ZdwnXKkLbLXQaN0EFxP7FSOCTQwrGe7wiwTiMkX/d6g="
+              "CodeSha256": "7UdB2UxCgff2VS2Bkx2OzQKs6bTehq6WDBQifmqKuII="
             }
           },
-          "HttpApi": {
-            "Type": "AWS::ApiGatewayV2::Api",
+          "ApiGatewayRestApi": {
+            "Type": "AWS::ApiGateway::RestApi",
             "Properties": {
               "Name": "dev-aws-lambda-padlock-api",
-              "ProtocolType": "HTTP"
+              "EndpointConfiguration": {
+                "Types": [
+                  "EDGE"
+                ]
+              },
+              "Policy": ""
             }
           },
-          "HttpApiStage": {
-            "Type": "AWS::ApiGatewayV2::Stage",
+          "ApiGatewayResourceApi": {
+            "Type": "AWS::ApiGateway::Resource",
             "Properties": {
-              "ApiId": {
-                "Ref": "HttpApi"
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
               },
-              "StageName": "$default",
-              "AutoDeploy": true,
-              "DefaultRouteSettings": {
-                "DetailedMetricsEnabled": false
+              "PathPart": "api",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
               }
             }
           },
-          "PadlockLambdaPermissionHttpApi": {
+          "ApiGatewayResourceApiUsers": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceApi"
+              },
+              "PathPart": "users",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceApiUsersUseridVar": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceApiUsers"
+              },
+              "PathPart": "{user_id}",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceApiUsersUseridVarPassword": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceApiUsersUseridVar"
+              },
+              "PathPart": "password",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceApiUsersUseridVarEmail": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceApiUsersUseridVar"
+              },
+              "PathPart": "email",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayMethodApiUsersUseridVarGet": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "GET",
+              "RequestParameters": {
+                "method.request.path.user_id": true
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceApiUsersUseridVar"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "UsersLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            }
+          },
+          "ApiGatewayMethodApiUsersUseridVarPost": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "POST",
+              "RequestParameters": {
+                "method.request.path.user_id": true
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceApiUsersUseridVar"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "UsersLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            }
+          },
+          "ApiGatewayMethodApiUsersUseridVarDelete": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "DELETE",
+              "RequestParameters": {
+                "method.request.path.user_id": true
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceApiUsersUseridVar"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "UsersLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            }
+          },
+          "ApiGatewayMethodApiUsersUseridVarPasswordPut": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "PUT",
+              "RequestParameters": {
+                "method.request.path.user_id": true
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceApiUsersUseridVarPassword"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "UsersLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            }
+          },
+          "ApiGatewayMethodApiUsersUseridVarEmailPut": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "PUT",
+              "RequestParameters": {
+                "method.request.path.user_id": true
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceApiUsersUseridVarEmail"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "UsersLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            }
+          },
+          "ApiGatewayDeployment1620641791679": {
+            "Type": "AWS::ApiGateway::Deployment",
+            "Properties": {
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "StageName": "dev"
+            },
+            "DependsOn": [
+              "ApiGatewayMethodApiUsersUseridVarGet",
+              "ApiGatewayMethodApiUsersUseridVarPost",
+              "ApiGatewayMethodApiUsersUseridVarDelete",
+              "ApiGatewayMethodApiUsersUseridVarPasswordPut",
+              "ApiGatewayMethodApiUsersUseridVarEmailPut"
+            ]
+          },
+          "UsersLambdaPermissionApiGateway": {
             "Type": "AWS::Lambda::Permission",
             "Properties": {
               "FunctionName": {
                 "Fn::GetAtt": [
-                  "PadlockLambdaFunction",
+                  "UsersLambdaFunction",
                   "Arn"
                 ]
               },
@@ -253,69 +549,13 @@
                     },
                     ":",
                     {
-                      "Ref": "HttpApi"
+                      "Ref": "ApiGatewayRestApi"
                     },
-                    "/*"
+                    "/*/*"
                   ]
                 ]
               }
             }
-          },
-          "HttpApiIntegrationPadlock": {
-            "Type": "AWS::ApiGatewayV2::Integration",
-            "Properties": {
-              "ApiId": {
-                "Ref": "HttpApi"
-              },
-              "IntegrationType": "AWS_PROXY",
-              "IntegrationUri": {
-                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"PadlockLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
-              },
-              "PayloadFormatVersion": "2.0",
-              "TimeoutInMillis": 6500
-            }
-          },
-          "HttpApiRouteGet": {
-            "Type": "AWS::ApiGatewayV2::Route",
-            "Properties": {
-              "ApiId": {
-                "Ref": "HttpApi"
-              },
-              "RouteKey": "GET /",
-              "Target": {
-                "Fn::Join": [
-                  "/",
-                  [
-                    "integrations",
-                    {
-                      "Ref": "HttpApiIntegrationPadlock"
-                    }
-                  ]
-                ]
-              }
-            },
-            "DependsOn": "HttpApiIntegrationPadlock"
-          },
-          "HttpApiRoutePostData": {
-            "Type": "AWS::ApiGatewayV2::Route",
-            "Properties": {
-              "ApiId": {
-                "Ref": "HttpApi"
-              },
-              "RouteKey": "POST /data",
-              "Target": {
-                "Fn::Join": [
-                  "/",
-                  [
-                    "integrations",
-                    {
-                      "Ref": "HttpApiIntegrationPadlock"
-                    }
-                  ]
-                ]
-              }
-            },
-            "DependsOn": "HttpApiIntegrationPadlock"
           }
         },
         "Outputs": {
@@ -327,33 +567,24 @@
               "Name": "sls-aws-lambda-padlock-api-dev-ServerlessDeploymentBucketName"
             }
           },
-          "PadlockLambdaFunctionQualifiedArn": {
+          "UsersLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "PadlockLambdaVersion2JcLdN7qxBLQJo8VhHOnFdoluqcearW3lT0osuJQ"
+              "Ref": "UsersLambdaVersionHgynfYAeybCnsarnrUfl0jcOO7Qvw49TrSQiAyONGY"
             },
             "Export": {
-              "Name": "sls-aws-lambda-padlock-api-dev-PadlockLambdaFunctionQualifiedArn"
+              "Name": "sls-aws-lambda-padlock-api-dev-UsersLambdaFunctionQualifiedArn"
             }
           },
-          "HttpApiId": {
-            "Description": "Id of the HTTP API",
-            "Value": {
-              "Ref": "HttpApi"
-            },
-            "Export": {
-              "Name": "sls-aws-lambda-padlock-api-dev-HttpApiId"
-            }
-          },
-          "HttpApiUrl": {
-            "Description": "URL of the HTTP API",
+          "ServiceEndpoint": {
+            "Description": "URL of the service endpoint",
             "Value": {
               "Fn::Join": [
                 "",
                 [
                   "https://",
                   {
-                    "Ref": "HttpApi"
+                    "Ref": "ApiGatewayRestApi"
                   },
                   ".execute-api.",
                   {
@@ -362,12 +593,13 @@
                   ".",
                   {
                     "Ref": "AWS::URLSuffix"
-                  }
+                  },
+                  "/dev"
                 ]
               ]
             },
             "Export": {
-              "Name": "sls-aws-lambda-padlock-api-dev-HttpApiUrl"
+              "Name": "sls-aws-lambda-padlock-api-dev-ServiceEndpoint"
             }
           }
         }
@@ -458,33 +690,77 @@
     },
     "pluginsData": {},
     "functions": {
-      "padlock": {
-        "handler": "handler.padlock",
+      "users": {
+        "handler": "routes/api/users.handler",
         "events": [
           {
-            "httpApi": {
-              "path": "/",
-              "method": "get"
-            },
-            "resolvedMethod": "GET",
-            "resolvedPath": "/"
+            "http": {
+              "path": "api/users/{user_id}",
+              "request": {
+                "parameters": {
+                  "method.request.path.user_id": true
+                }
+              },
+              "method": "get",
+              "integration": "AWS_PROXY"
+            }
           },
           {
-            "httpApi": {
-              "path": "/data",
-              "method": "post"
-            },
-            "resolvedMethod": "POST",
-            "resolvedPath": "/data"
+            "http": {
+              "path": "api/users/{user_id}",
+              "request": {
+                "parameters": {
+                  "method.request.path.user_id": true
+                }
+              },
+              "method": "post",
+              "integration": "AWS_PROXY"
+            }
+          },
+          {
+            "http": {
+              "path": "api/users/{user_id}",
+              "request": {
+                "parameters": {
+                  "method.request.path.user_id": true
+                }
+              },
+              "method": "delete",
+              "integration": "AWS_PROXY"
+            }
+          },
+          {
+            "http": {
+              "path": "api/users/{user_id}/password",
+              "request": {
+                "parameters": {
+                  "method.request.path.user_id": true
+                }
+              },
+              "method": "put",
+              "integration": "AWS_PROXY"
+            }
+          },
+          {
+            "http": {
+              "path": "api/users/{user_id}/email",
+              "request": {
+                "parameters": {
+                  "method.request.path.user_id": true
+                }
+              },
+              "method": "put",
+              "integration": "AWS_PROXY"
+            }
           }
         ],
-        "name": "aws-lambda-padlock-api-dev-padlock",
+        "name": "aws-lambda-padlock-api-dev-users",
         "package": {},
         "memory": 1024,
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "PadlockLambdaVersion2JcLdN7qxBLQJo8VhHOnFdoluqcearW3lT0osuJQ"
+        "versionLogicalId": "UsersLambdaVersionHgynfYAeybCnsarnrUfl0jcOO7Qvw49TrSQiAyONGY"
       }
     },
     "configValidationMode": "warn",
@@ -506,7 +782,7 @@
     "artifact": "E:\\1PROGRAMMING\\Padlock-VersionControl\\aws-lambda-padlock-api\\.serverless\\aws-lambda-padlock-api.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/aws-lambda-padlock-api/dev/1620397059339-2021-05-07T14:17:39.339Z",
+    "artifactDirectoryName": "serverless/aws-lambda-padlock-api/dev/1620641794483-2021-05-10T10:16:34.483Z",
     "artifact": "aws-lambda-padlock-api.zip"
   }
 }
