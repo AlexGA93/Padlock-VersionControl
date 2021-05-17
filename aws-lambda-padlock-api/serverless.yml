@@ -10,8 +10,8 @@ provider:
   region: eu-west-3 #Paris
 
 functions:
-  users:
-    handler: routes/api/users.handler
+  getUser:
+    handler: users.getUser
     events:
       - http:
           path: /api/users/{user_id}
@@ -20,73 +20,39 @@ functions:
               paths:
                 user_id: true
           method: get
+  newUser:
+    handler: users.newUser
+    events:
       - http:
-          path: /api/users/{user_id}
-          request:
-            parameters:
-              paths:
-                user_id: true
+          path: /api/users/new
           method: post
+  deleteUser:
+    handler: users.deleteUser
+    events:
       - http:
-          path: /api/users/{user_id}
+          path: /api/users/delete/{user_id}
           request:
             parameters:
               paths:
                 user_id: true
           method: delete
+  editUserEmail:
+    handler: users.editUserEmail
+    events:
       - http:
-          path: /api/users/{user_id}/password
+          path: /api/users/Email/edit/{editUserE_id}
           request:
             parameters:
               paths:
-                user_id: true
+                editUserE_id: true
           method: put
+  editUserPass:
+    handler: users.editUserPass
+    events:
       - http:
-          path: /api/users/{user_id}/email
+          path: /api/users/Pass/edit/{editUserP_id}
           request:
             parameters:
               paths:
-                user_id: true
+                editUserP_id: true
           method: put
-  # services:
-  #   handler: routes/api/services.handler
-  #   events:
-  #     - http:
-  #         path: /api/services/
-  #         method: get
-  #     - http:
-  #         path: /api/services/{user_id}/{service_id}/my_data
-  #         request:
-  #           parameters:
-  #             paths:
-  #               user_id: true
-  #               service_id: true
-  #         method: post
-  #     - http:
-  #         path: /api/services/{service_id}
-  #         request:
-  #           parameters:
-  #             paths:
-  #               service_id: true
-  #         method: delete
-  #     - http:
-  #         path: /api/users/{service_id}/name
-  #         request:
-  #           parameters:
-  #             paths:
-  #               service_id: true
-  #         method: put
-  #     - http:
-  #         path: /api/users/{service_id}/pass
-  #         request:
-  #           parameters:
-  #             paths:
-  #               service_id: true
-  #         method: put
-  #     - http:
-  #         path: /api/users/{service_id}/bio
-  #         request:
-  #           parameters:
-  #             paths:
-  #               service_id: true
-  #         method: put

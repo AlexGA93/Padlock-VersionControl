@@ -71,10 +71,34 @@
         }
       }
     },
-    "UsersLogGroup": {
+    "GetUserLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/aws-lambda-padlock-api-dev-users"
+        "LogGroupName": "/aws/lambda/aws-lambda-padlock-api-dev-getUser"
+      }
+    },
+    "NewUserLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/aws-lambda-padlock-api-dev-newUser"
+      }
+    },
+    "DeleteUserLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/aws-lambda-padlock-api-dev-deleteUser"
+      }
+    },
+    "EditUserEmailLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/aws-lambda-padlock-api-dev-editUserEmail"
+      }
+    },
+    "EditUserPassLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/aws-lambda-padlock-api-dev-editUserPass"
       }
     },
     "IamRoleLambdaExecution": {
@@ -154,18 +178,18 @@
         }
       }
     },
-    "UsersLambdaFunction": {
+    "GetUserLambdaFunction": {
       "Type": "AWS::Lambda::Function",
       "Properties": {
         "Code": {
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/aws-lambda-padlock-api/dev/1620641794483-2021-05-10T10:16:34.483Z/aws-lambda-padlock-api.zip"
+          "S3Key": "serverless/aws-lambda-padlock-api/dev/1621255997158-2021-05-17T12:53:17.158Z/aws-lambda-padlock-api.zip"
         },
-        "Handler": "routes/api/users.handler",
+        "Handler": "users.getUser",
         "Runtime": "nodejs14.x",
-        "FunctionName": "aws-lambda-padlock-api-dev-users",
+        "FunctionName": "aws-lambda-padlock-api-dev-getUser",
         "MemorySize": 1024,
         "Timeout": 6,
         "Role": {
@@ -176,17 +200,157 @@
         }
       },
       "DependsOn": [
-        "UsersLogGroup"
+        "GetUserLogGroup"
       ]
     },
-    "UsersLambdaVersionHgynfYAeybCnsarnrUfl0jcOO7Qvw49TrSQiAyONGY": {
+    "NewUserLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/aws-lambda-padlock-api/dev/1621255997158-2021-05-17T12:53:17.158Z/aws-lambda-padlock-api.zip"
+        },
+        "Handler": "users.newUser",
+        "Runtime": "nodejs14.x",
+        "FunctionName": "aws-lambda-padlock-api-dev-newUser",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "NewUserLogGroup"
+      ]
+    },
+    "DeleteUserLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/aws-lambda-padlock-api/dev/1621255997158-2021-05-17T12:53:17.158Z/aws-lambda-padlock-api.zip"
+        },
+        "Handler": "users.deleteUser",
+        "Runtime": "nodejs14.x",
+        "FunctionName": "aws-lambda-padlock-api-dev-deleteUser",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "DeleteUserLogGroup"
+      ]
+    },
+    "EditUserEmailLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/aws-lambda-padlock-api/dev/1621255997158-2021-05-17T12:53:17.158Z/aws-lambda-padlock-api.zip"
+        },
+        "Handler": "users.editUserEmail",
+        "Runtime": "nodejs14.x",
+        "FunctionName": "aws-lambda-padlock-api-dev-editUserEmail",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "EditUserEmailLogGroup"
+      ]
+    },
+    "EditUserPassLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/aws-lambda-padlock-api/dev/1621255997158-2021-05-17T12:53:17.158Z/aws-lambda-padlock-api.zip"
+        },
+        "Handler": "users.editUserPass",
+        "Runtime": "nodejs14.x",
+        "FunctionName": "aws-lambda-padlock-api-dev-editUserPass",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "EditUserPassLogGroup"
+      ]
+    },
+    "GetUserLambdaVersion7NZu8raYj0EELrqUqz2UjRclZOHUn7y0hVXTKj5s3s": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
-          "Ref": "UsersLambdaFunction"
+          "Ref": "GetUserLambdaFunction"
         },
-        "CodeSha256": "7UdB2UxCgff2VS2Bkx2OzQKs6bTehq6WDBQifmqKuII="
+        "CodeSha256": "uQuV64eq5vnahr7s0PuIRUuiavz2BNiI3QKPv1hUlNg="
+      }
+    },
+    "NewUserLambdaVersionty8VtYbpI7ic0cdaNJMkqutjJVhKiZRZwwjKR5odQC8": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "NewUserLambdaFunction"
+        },
+        "CodeSha256": "uQuV64eq5vnahr7s0PuIRUuiavz2BNiI3QKPv1hUlNg="
+      }
+    },
+    "DeleteUserLambdaVersion8Fo3hl9ht8eWcclJv0H0dQdzjsscHYY43Lwwq62aA0": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "DeleteUserLambdaFunction"
+        },
+        "CodeSha256": "uQuV64eq5vnahr7s0PuIRUuiavz2BNiI3QKPv1hUlNg="
+      }
+    },
+    "EditUserEmailLambdaVersionVwax3pz6kUaSoNGC8kTq9CcZyIZs1zhHawkSSTosbWk": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "EditUserEmailLambdaFunction"
+        },
+        "CodeSha256": "uQuV64eq5vnahr7s0PuIRUuiavz2BNiI3QKPv1hUlNg="
+      }
+    },
+    "EditUserPassLambdaVersionDqIM1L5TzG3YYkRCdftaWie6czRnYrf3bvYabGrqYc": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "EditUserPassLambdaFunction"
+        },
+        "CodeSha256": "uQuV64eq5vnahr7s0PuIRUuiavz2BNiI3QKPv1hUlNg="
       }
     },
     "ApiGatewayRestApi": {
@@ -240,25 +404,109 @@
         }
       }
     },
-    "ApiGatewayResourceApiUsersUseridVarPassword": {
+    "ApiGatewayResourceApiUsersNew": {
       "Type": "AWS::ApiGateway::Resource",
       "Properties": {
         "ParentId": {
-          "Ref": "ApiGatewayResourceApiUsersUseridVar"
+          "Ref": "ApiGatewayResourceApiUsers"
         },
-        "PathPart": "password",
+        "PathPart": "new",
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
         }
       }
     },
-    "ApiGatewayResourceApiUsersUseridVarEmail": {
+    "ApiGatewayResourceApiUsersDelete": {
       "Type": "AWS::ApiGateway::Resource",
       "Properties": {
         "ParentId": {
-          "Ref": "ApiGatewayResourceApiUsersUseridVar"
+          "Ref": "ApiGatewayResourceApiUsers"
         },
-        "PathPart": "email",
+        "PathPart": "delete",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceApiUsersDeleteUseridVar": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceApiUsersDelete"
+        },
+        "PathPart": "{user_id}",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceApiUsersEmail": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceApiUsers"
+        },
+        "PathPart": "Email",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceApiUsersEmailEdit": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceApiUsersEmail"
+        },
+        "PathPart": "edit",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceApiUsersEmailEditEditusereidVar": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceApiUsersEmailEdit"
+        },
+        "PathPart": "{editUserE_id}",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceApiUsersPass": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceApiUsers"
+        },
+        "PathPart": "Pass",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceApiUsersPassEdit": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceApiUsersPass"
+        },
+        "PathPart": "edit",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceApiUsersPassEditEdituserpidVar": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceApiUsersPassEdit"
+        },
+        "PathPart": "{editUserP_id}",
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
         }
@@ -297,7 +545,7 @@
                 ":lambda:path/2015-03-31/functions/",
                 {
                   "Fn::GetAtt": [
-                    "UsersLambdaFunction",
+                    "GetUserLambdaFunction",
                     "Arn"
                   ]
                 },
@@ -309,15 +557,13 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayMethodApiUsersUseridVarPost": {
+    "ApiGatewayMethodApiUsersNewPost": {
       "Type": "AWS::ApiGateway::Method",
       "Properties": {
         "HttpMethod": "POST",
-        "RequestParameters": {
-          "method.request.path.user_id": true
-        },
+        "RequestParameters": {},
         "ResourceId": {
-          "Ref": "ApiGatewayResourceApiUsersUseridVar"
+          "Ref": "ApiGatewayResourceApiUsersNew"
         },
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
@@ -342,7 +588,7 @@
                 ":lambda:path/2015-03-31/functions/",
                 {
                   "Fn::GetAtt": [
-                    "UsersLambdaFunction",
+                    "NewUserLambdaFunction",
                     "Arn"
                   ]
                 },
@@ -354,7 +600,7 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayMethodApiUsersUseridVarDelete": {
+    "ApiGatewayMethodApiUsersDeleteUseridVarDelete": {
       "Type": "AWS::ApiGateway::Method",
       "Properties": {
         "HttpMethod": "DELETE",
@@ -362,7 +608,7 @@
           "method.request.path.user_id": true
         },
         "ResourceId": {
-          "Ref": "ApiGatewayResourceApiUsersUseridVar"
+          "Ref": "ApiGatewayResourceApiUsersDeleteUseridVar"
         },
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
@@ -387,7 +633,7 @@
                 ":lambda:path/2015-03-31/functions/",
                 {
                   "Fn::GetAtt": [
-                    "UsersLambdaFunction",
+                    "DeleteUserLambdaFunction",
                     "Arn"
                   ]
                 },
@@ -399,15 +645,15 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayMethodApiUsersUseridVarPasswordPut": {
+    "ApiGatewayMethodApiUsersEmailEditEditusereidVarPut": {
       "Type": "AWS::ApiGateway::Method",
       "Properties": {
         "HttpMethod": "PUT",
         "RequestParameters": {
-          "method.request.path.user_id": true
+          "method.request.path.editUserE_id": true
         },
         "ResourceId": {
-          "Ref": "ApiGatewayResourceApiUsersUseridVarPassword"
+          "Ref": "ApiGatewayResourceApiUsersEmailEditEditusereidVar"
         },
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
@@ -432,7 +678,7 @@
                 ":lambda:path/2015-03-31/functions/",
                 {
                   "Fn::GetAtt": [
-                    "UsersLambdaFunction",
+                    "EditUserEmailLambdaFunction",
                     "Arn"
                   ]
                 },
@@ -444,15 +690,15 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayMethodApiUsersUseridVarEmailPut": {
+    "ApiGatewayMethodApiUsersPassEditEdituserpidVarPut": {
       "Type": "AWS::ApiGateway::Method",
       "Properties": {
         "HttpMethod": "PUT",
         "RequestParameters": {
-          "method.request.path.user_id": true
+          "method.request.path.editUserP_id": true
         },
         "ResourceId": {
-          "Ref": "ApiGatewayResourceApiUsersUseridVarEmail"
+          "Ref": "ApiGatewayResourceApiUsersPassEditEdituserpidVar"
         },
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
@@ -477,7 +723,7 @@
                 ":lambda:path/2015-03-31/functions/",
                 {
                   "Fn::GetAtt": [
-                    "UsersLambdaFunction",
+                    "EditUserPassLambdaFunction",
                     "Arn"
                   ]
                 },
@@ -489,7 +735,7 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1620641791679": {
+    "ApiGatewayDeployment1621255993131": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -499,18 +745,166 @@
       },
       "DependsOn": [
         "ApiGatewayMethodApiUsersUseridVarGet",
-        "ApiGatewayMethodApiUsersUseridVarPost",
-        "ApiGatewayMethodApiUsersUseridVarDelete",
-        "ApiGatewayMethodApiUsersUseridVarPasswordPut",
-        "ApiGatewayMethodApiUsersUseridVarEmailPut"
+        "ApiGatewayMethodApiUsersNewPost",
+        "ApiGatewayMethodApiUsersDeleteUseridVarDelete",
+        "ApiGatewayMethodApiUsersEmailEditEditusereidVarPut",
+        "ApiGatewayMethodApiUsersPassEditEdituserpidVarPut"
       ]
     },
-    "UsersLambdaPermissionApiGateway": {
+    "GetUserLambdaPermissionApiGateway": {
       "Type": "AWS::Lambda::Permission",
       "Properties": {
         "FunctionName": {
           "Fn::GetAtt": [
-            "UsersLambdaFunction",
+            "GetUserLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
+    },
+    "NewUserLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "NewUserLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
+    },
+    "DeleteUserLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "DeleteUserLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
+    },
+    "EditUserEmailLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "EditUserEmailLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
+    },
+    "EditUserPassLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "EditUserPassLambdaFunction",
             "Arn"
           ]
         },
@@ -552,13 +946,49 @@
         "Name": "sls-aws-lambda-padlock-api-dev-ServerlessDeploymentBucketName"
       }
     },
-    "UsersLambdaFunctionQualifiedArn": {
+    "GetUserLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "UsersLambdaVersionHgynfYAeybCnsarnrUfl0jcOO7Qvw49TrSQiAyONGY"
+        "Ref": "GetUserLambdaVersion7NZu8raYj0EELrqUqz2UjRclZOHUn7y0hVXTKj5s3s"
       },
       "Export": {
-        "Name": "sls-aws-lambda-padlock-api-dev-UsersLambdaFunctionQualifiedArn"
+        "Name": "sls-aws-lambda-padlock-api-dev-GetUserLambdaFunctionQualifiedArn"
+      }
+    },
+    "NewUserLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "NewUserLambdaVersionty8VtYbpI7ic0cdaNJMkqutjJVhKiZRZwwjKR5odQC8"
+      },
+      "Export": {
+        "Name": "sls-aws-lambda-padlock-api-dev-NewUserLambdaFunctionQualifiedArn"
+      }
+    },
+    "DeleteUserLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "DeleteUserLambdaVersion8Fo3hl9ht8eWcclJv0H0dQdzjsscHYY43Lwwq62aA0"
+      },
+      "Export": {
+        "Name": "sls-aws-lambda-padlock-api-dev-DeleteUserLambdaFunctionQualifiedArn"
+      }
+    },
+    "EditUserEmailLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "EditUserEmailLambdaVersionVwax3pz6kUaSoNGC8kTq9CcZyIZs1zhHawkSSTosbWk"
+      },
+      "Export": {
+        "Name": "sls-aws-lambda-padlock-api-dev-EditUserEmailLambdaFunctionQualifiedArn"
+      }
+    },
+    "EditUserPassLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "EditUserPassLambdaVersionDqIM1L5TzG3YYkRCdftaWie6czRnYrf3bvYabGrqYc"
+      },
+      "Export": {
+        "Name": "sls-aws-lambda-padlock-api-dev-EditUserPassLambdaFunctionQualifiedArn"
       }
     },
     "ServiceEndpoint": {
