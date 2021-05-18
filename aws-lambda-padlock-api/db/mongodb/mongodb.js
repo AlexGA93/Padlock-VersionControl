@@ -20,7 +20,7 @@ const mongooseOptions =
 
 
 const connectDB = async () => {
-	mongoose
+	await mongoose
 	.connect(uri,mongooseOptions)
 	.then(() => console.log('Connected to MongoDB!'))
 	.catch(e => console.log(e)

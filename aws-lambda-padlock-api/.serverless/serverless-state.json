@@ -86,16 +86,16 @@
               }
             }
           },
-          "GetUserLogGroup": {
-            "Type": "AWS::Logs::LogGroup",
-            "Properties": {
-              "LogGroupName": "/aws/lambda/aws-lambda-padlock-api-dev-getUser"
-            }
-          },
           "NewUserLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
               "LogGroupName": "/aws/lambda/aws-lambda-padlock-api-dev-newUser"
+            }
+          },
+          "GetCurrentUserLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/aws-lambda-padlock-api-dev-getCurrentUser"
             }
           },
           "DeleteUserLogGroup": {
@@ -114,6 +114,42 @@
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
               "LogGroupName": "/aws/lambda/aws-lambda-padlock-api-dev-editUserPass"
+            }
+          },
+          "NewServiceLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/aws-lambda-padlock-api-dev-newService"
+            }
+          },
+          "GetCurrentServiceLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/aws-lambda-padlock-api-dev-getCurrentService"
+            }
+          },
+          "DeleteServiceLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/aws-lambda-padlock-api-dev-deleteService"
+            }
+          },
+          "EditServiceNameLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/aws-lambda-padlock-api-dev-editServiceName"
+            }
+          },
+          "EditServicePassLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/aws-lambda-padlock-api-dev-editServicePass"
+            }
+          },
+          "EditServiceBioLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/aws-lambda-padlock-api-dev-editServiceBio"
             }
           },
           "IamRoleLambdaExecution": {
@@ -193,31 +229,6 @@
               }
             }
           },
-          "GetUserLambdaFunction": {
-            "Type": "AWS::Lambda::Function",
-            "Properties": {
-              "Code": {
-                "S3Bucket": {
-                  "Ref": "ServerlessDeploymentBucket"
-                },
-                "S3Key": "serverless/aws-lambda-padlock-api/dev/1621255997158-2021-05-17T12:53:17.158Z/aws-lambda-padlock-api.zip"
-              },
-              "Handler": "users.getUser",
-              "Runtime": "nodejs14.x",
-              "FunctionName": "aws-lambda-padlock-api-dev-getUser",
-              "MemorySize": 1024,
-              "Timeout": 6,
-              "Role": {
-                "Fn::GetAtt": [
-                  "IamRoleLambdaExecution",
-                  "Arn"
-                ]
-              }
-            },
-            "DependsOn": [
-              "GetUserLogGroup"
-            ]
-          },
           "NewUserLambdaFunction": {
             "Type": "AWS::Lambda::Function",
             "Properties": {
@@ -225,9 +236,9 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/aws-lambda-padlock-api/dev/1621255997158-2021-05-17T12:53:17.158Z/aws-lambda-padlock-api.zip"
+                "S3Key": "serverless/aws-lambda-padlock-api/dev/1621345508739-2021-05-18T13:45:08.739Z/aws-lambda-padlock-api.zip"
               },
-              "Handler": "users.newUser",
+              "Handler": "Routes/api/users.newUser",
               "Runtime": "nodejs14.x",
               "FunctionName": "aws-lambda-padlock-api-dev-newUser",
               "MemorySize": 1024,
@@ -243,6 +254,31 @@
               "NewUserLogGroup"
             ]
           },
+          "GetCurrentUserLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/aws-lambda-padlock-api/dev/1621345508739-2021-05-18T13:45:08.739Z/aws-lambda-padlock-api.zip"
+              },
+              "Handler": "Routes/api/users.getCurrentUser",
+              "Runtime": "nodejs14.x",
+              "FunctionName": "aws-lambda-padlock-api-dev-getCurrentUser",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "GetCurrentUserLogGroup"
+            ]
+          },
           "DeleteUserLambdaFunction": {
             "Type": "AWS::Lambda::Function",
             "Properties": {
@@ -250,9 +286,9 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/aws-lambda-padlock-api/dev/1621255997158-2021-05-17T12:53:17.158Z/aws-lambda-padlock-api.zip"
+                "S3Key": "serverless/aws-lambda-padlock-api/dev/1621345508739-2021-05-18T13:45:08.739Z/aws-lambda-padlock-api.zip"
               },
-              "Handler": "users.deleteUser",
+              "Handler": "Routes/api/users.deleteUser",
               "Runtime": "nodejs14.x",
               "FunctionName": "aws-lambda-padlock-api-dev-deleteUser",
               "MemorySize": 1024,
@@ -275,9 +311,9 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/aws-lambda-padlock-api/dev/1621255997158-2021-05-17T12:53:17.158Z/aws-lambda-padlock-api.zip"
+                "S3Key": "serverless/aws-lambda-padlock-api/dev/1621345508739-2021-05-18T13:45:08.739Z/aws-lambda-padlock-api.zip"
               },
-              "Handler": "users.editUserEmail",
+              "Handler": "Routes/api/users.editUserEmail",
               "Runtime": "nodejs14.x",
               "FunctionName": "aws-lambda-padlock-api-dev-editUserEmail",
               "MemorySize": 1024,
@@ -300,9 +336,9 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/aws-lambda-padlock-api/dev/1621255997158-2021-05-17T12:53:17.158Z/aws-lambda-padlock-api.zip"
+                "S3Key": "serverless/aws-lambda-padlock-api/dev/1621345508739-2021-05-18T13:45:08.739Z/aws-lambda-padlock-api.zip"
               },
-              "Handler": "users.editUserPass",
+              "Handler": "Routes/api/users.editUserPass",
               "Runtime": "nodejs14.x",
               "FunctionName": "aws-lambda-padlock-api-dev-editUserPass",
               "MemorySize": 1024,
@@ -318,54 +354,264 @@
               "EditUserPassLogGroup"
             ]
           },
-          "GetUserLambdaVersion7NZu8raYj0EELrqUqz2UjRclZOHUn7y0hVXTKj5s3s": {
-            "Type": "AWS::Lambda::Version",
-            "DeletionPolicy": "Retain",
+          "NewServiceLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
             "Properties": {
-              "FunctionName": {
-                "Ref": "GetUserLambdaFunction"
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/aws-lambda-padlock-api/dev/1621345508739-2021-05-18T13:45:08.739Z/aws-lambda-padlock-api.zip"
               },
-              "CodeSha256": "uQuV64eq5vnahr7s0PuIRUuiavz2BNiI3QKPv1hUlNg="
-            }
+              "Handler": "Routes/api/services.newService",
+              "Runtime": "nodejs14.x",
+              "FunctionName": "aws-lambda-padlock-api-dev-newService",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "NewServiceLogGroup"
+            ]
           },
-          "NewUserLambdaVersionty8VtYbpI7ic0cdaNJMkqutjJVhKiZRZwwjKR5odQC8": {
+          "GetCurrentServiceLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/aws-lambda-padlock-api/dev/1621345508739-2021-05-18T13:45:08.739Z/aws-lambda-padlock-api.zip"
+              },
+              "Handler": "Routes/api/services.getCurrentService",
+              "Runtime": "nodejs14.x",
+              "FunctionName": "aws-lambda-padlock-api-dev-getCurrentService",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "GetCurrentServiceLogGroup"
+            ]
+          },
+          "DeleteServiceLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/aws-lambda-padlock-api/dev/1621345508739-2021-05-18T13:45:08.739Z/aws-lambda-padlock-api.zip"
+              },
+              "Handler": "Routes/api/services.deleteService",
+              "Runtime": "nodejs14.x",
+              "FunctionName": "aws-lambda-padlock-api-dev-deleteService",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "DeleteServiceLogGroup"
+            ]
+          },
+          "EditServiceNameLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/aws-lambda-padlock-api/dev/1621345508739-2021-05-18T13:45:08.739Z/aws-lambda-padlock-api.zip"
+              },
+              "Handler": "Routes/api/services.editServiceName",
+              "Runtime": "nodejs14.x",
+              "FunctionName": "aws-lambda-padlock-api-dev-editServiceName",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "EditServiceNameLogGroup"
+            ]
+          },
+          "EditServicePassLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/aws-lambda-padlock-api/dev/1621345508739-2021-05-18T13:45:08.739Z/aws-lambda-padlock-api.zip"
+              },
+              "Handler": "Routes/api/services.editServicePass",
+              "Runtime": "nodejs14.x",
+              "FunctionName": "aws-lambda-padlock-api-dev-editServicePass",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "EditServicePassLogGroup"
+            ]
+          },
+          "EditServiceBioLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/aws-lambda-padlock-api/dev/1621345508739-2021-05-18T13:45:08.739Z/aws-lambda-padlock-api.zip"
+              },
+              "Handler": "Routes/api/services.editServiceBio",
+              "Runtime": "nodejs14.x",
+              "FunctionName": "aws-lambda-padlock-api-dev-editServiceBio",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "EditServiceBioLogGroup"
+            ]
+          },
+          "NewUserLambdaVersionWYDGeAodfH7llozFAccfMvZOIZ6qOJFIQevSfbfPo": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "NewUserLambdaFunction"
               },
-              "CodeSha256": "uQuV64eq5vnahr7s0PuIRUuiavz2BNiI3QKPv1hUlNg="
+              "CodeSha256": "NQDbvx8AF1/4vj0G+1YTFbG+6hl85sgIzzlvIZgIVpo="
             }
           },
-          "DeleteUserLambdaVersion8Fo3hl9ht8eWcclJv0H0dQdzjsscHYY43Lwwq62aA0": {
+          "GetCurrentUserLambdaVersion0sCD4Q8hkCtFfS8IsFvtJyxhJgXZ4zsYVDzcnwpKInw": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetCurrentUserLambdaFunction"
+              },
+              "CodeSha256": "NQDbvx8AF1/4vj0G+1YTFbG+6hl85sgIzzlvIZgIVpo="
+            }
+          },
+          "DeleteUserLambdaVersionr9tCM4AaDKZI4bmb8mVIFC5XnBpeOsNopFBqzJWRk": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "DeleteUserLambdaFunction"
               },
-              "CodeSha256": "uQuV64eq5vnahr7s0PuIRUuiavz2BNiI3QKPv1hUlNg="
+              "CodeSha256": "NQDbvx8AF1/4vj0G+1YTFbG+6hl85sgIzzlvIZgIVpo="
             }
           },
-          "EditUserEmailLambdaVersionVwax3pz6kUaSoNGC8kTq9CcZyIZs1zhHawkSSTosbWk": {
+          "EditUserEmailLambdaVersionjXAOxz7EfFUvCKK22kOLl3Suwheo9bRhx7Hix5OGGo": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "EditUserEmailLambdaFunction"
               },
-              "CodeSha256": "uQuV64eq5vnahr7s0PuIRUuiavz2BNiI3QKPv1hUlNg="
+              "CodeSha256": "NQDbvx8AF1/4vj0G+1YTFbG+6hl85sgIzzlvIZgIVpo="
             }
           },
-          "EditUserPassLambdaVersionDqIM1L5TzG3YYkRCdftaWie6czRnYrf3bvYabGrqYc": {
+          "EditUserPassLambdaVersionHzaolsrpSfKh8HodW5RMIgyRn1RhA32C8kPl3lqZw": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "EditUserPassLambdaFunction"
               },
-              "CodeSha256": "uQuV64eq5vnahr7s0PuIRUuiavz2BNiI3QKPv1hUlNg="
+              "CodeSha256": "NQDbvx8AF1/4vj0G+1YTFbG+6hl85sgIzzlvIZgIVpo="
+            }
+          },
+          "NewServiceLambdaVersion2JJlCtbTuisjWj13oPVFsHtEpKVihMreMyqnC5Jx5WY": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "NewServiceLambdaFunction"
+              },
+              "CodeSha256": "NQDbvx8AF1/4vj0G+1YTFbG+6hl85sgIzzlvIZgIVpo="
+            }
+          },
+          "GetCurrentServiceLambdaVersiondHtstE4V8dSTIIr1HknPPksMVMtM16gHIPq6SuTcEA": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetCurrentServiceLambdaFunction"
+              },
+              "CodeSha256": "NQDbvx8AF1/4vj0G+1YTFbG+6hl85sgIzzlvIZgIVpo="
+            }
+          },
+          "DeleteServiceLambdaVersionTkzFsAbJ7z2ju15sAoeAxJCiGIHJ3ULY6zv8XWoFQk": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "DeleteServiceLambdaFunction"
+              },
+              "CodeSha256": "NQDbvx8AF1/4vj0G+1YTFbG+6hl85sgIzzlvIZgIVpo="
+            }
+          },
+          "EditServiceNameLambdaVersionJ46NEByFzynXLbpk11lketgro3wXkSJStx6O4uH0dM": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "EditServiceNameLambdaFunction"
+              },
+              "CodeSha256": "NQDbvx8AF1/4vj0G+1YTFbG+6hl85sgIzzlvIZgIVpo="
+            }
+          },
+          "EditServicePassLambdaVersionVmZ6qeelbNwZX7GT4cBDHzNPqaKe6xIcHOUWVw72s": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "EditServicePassLambdaFunction"
+              },
+              "CodeSha256": "NQDbvx8AF1/4vj0G+1YTFbG+6hl85sgIzzlvIZgIVpo="
+            }
+          },
+          "EditServiceBioLambdaVersionWweG2xuh0xcuJzbxHjA7yFJ9NZrv8aWrafmyPJyY4": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "EditServiceBioLambdaFunction"
+              },
+              "CodeSha256": "NQDbvx8AF1/4vj0G+1YTFbG+6hl85sgIzzlvIZgIVpo="
             }
           },
           "ApiGatewayRestApi": {
@@ -407,18 +653,6 @@
               }
             }
           },
-          "ApiGatewayResourceApiUsersUseridVar": {
-            "Type": "AWS::ApiGateway::Resource",
-            "Properties": {
-              "ParentId": {
-                "Ref": "ApiGatewayResourceApiUsers"
-              },
-              "PathPart": "{user_id}",
-              "RestApiId": {
-                "Ref": "ApiGatewayRestApi"
-              }
-            }
-          },
           "ApiGatewayResourceApiUsersNew": {
             "Type": "AWS::ApiGateway::Resource",
             "Properties": {
@@ -426,6 +660,18 @@
                 "Ref": "ApiGatewayResourceApiUsers"
               },
               "PathPart": "new",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceApiUsersUseridVar": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceApiUsers"
+              },
+              "PathPart": "{user_id}",
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
@@ -527,49 +773,172 @@
               }
             }
           },
-          "ApiGatewayMethodApiUsersUseridVarGet": {
-            "Type": "AWS::ApiGateway::Method",
+          "ApiGatewayResourceApiServices": {
+            "Type": "AWS::ApiGateway::Resource",
             "Properties": {
-              "HttpMethod": "GET",
-              "RequestParameters": {
-                "method.request.path.user_id": true
+              "ParentId": {
+                "Ref": "ApiGatewayResourceApi"
               },
-              "ResourceId": {
-                "Ref": "ApiGatewayResourceApiUsersUseridVar"
-              },
+              "PathPart": "services",
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceApiServicesNew": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceApiServices"
               },
-              "ApiKeyRequired": false,
-              "AuthorizationType": "NONE",
-              "Integration": {
-                "IntegrationHttpMethod": "POST",
-                "Type": "AWS_PROXY",
-                "Uri": {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:",
-                      {
-                        "Ref": "AWS::Partition"
-                      },
-                      ":apigateway:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":lambda:path/2015-03-31/functions/",
-                      {
-                        "Fn::GetAtt": [
-                          "GetUserLambdaFunction",
-                          "Arn"
-                        ]
-                      },
-                      "/invocations"
-                    ]
-                  ]
-                }
+              "PathPart": "new",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceApiServicesServiceidVar": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceApiServices"
               },
-              "MethodResponses": []
+              "PathPart": "{service_id}",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceApiServicesDelete": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceApiServices"
+              },
+              "PathPart": "delete",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceApiServicesDeleteServiceidVar": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceApiServicesDelete"
+              },
+              "PathPart": "{service_id}",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceApiServicesName": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceApiServices"
+              },
+              "PathPart": "name",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceApiServicesNameEdit": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceApiServicesName"
+              },
+              "PathPart": "edit",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceApiServicesNameEditEditservicenidVar": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceApiServicesNameEdit"
+              },
+              "PathPart": "{editServiceN_id}",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceApiServicesPass": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceApiServices"
+              },
+              "PathPart": "pass",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceApiServicesPassEdit": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceApiServicesPass"
+              },
+              "PathPart": "edit",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceApiServicesPassEditEditservicepidVar": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceApiServicesPassEdit"
+              },
+              "PathPart": "{editServiceP_id}",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceApiServicesBio": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceApiServices"
+              },
+              "PathPart": "bio",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceApiServicesBioEdit": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceApiServicesBio"
+              },
+              "PathPart": "edit",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceApiServicesBioEditEditservicebidVar": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceApiServicesBioEdit"
+              },
+              "PathPart": "{editServiceB_id}",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
             }
           },
           "ApiGatewayMethodApiUsersNewPost": {
@@ -604,6 +973,51 @@
                       {
                         "Fn::GetAtt": [
                           "NewUserLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            }
+          },
+          "ApiGatewayMethodApiUsersUseridVarGet": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "GET",
+              "RequestParameters": {
+                "method.request.path.user_id": true
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceApiUsersUseridVar"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "GetCurrentUserLambdaFunction",
                           "Arn"
                         ]
                       },
@@ -750,7 +1164,275 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1621255993131": {
+          "ApiGatewayMethodApiServicesNewPost": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "POST",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceApiServicesNew"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "NewServiceLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            }
+          },
+          "ApiGatewayMethodApiServicesServiceidVarGet": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "GET",
+              "RequestParameters": {
+                "method.request.path.service_id": true
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceApiServicesServiceidVar"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "GetCurrentServiceLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            }
+          },
+          "ApiGatewayMethodApiServicesDeleteServiceidVarDelete": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "DELETE",
+              "RequestParameters": {
+                "method.request.path.service_id": true
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceApiServicesDeleteServiceidVar"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "DeleteServiceLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            }
+          },
+          "ApiGatewayMethodApiServicesNameEditEditservicenidVarPut": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "PUT",
+              "RequestParameters": {
+                "method.request.path.editServiceN_id": true
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceApiServicesNameEditEditservicenidVar"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "EditServiceNameLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            }
+          },
+          "ApiGatewayMethodApiServicesPassEditEditservicepidVarPut": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "PUT",
+              "RequestParameters": {
+                "method.request.path.editServiceP_id": true
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceApiServicesPassEditEditservicepidVar"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "EditServicePassLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            }
+          },
+          "ApiGatewayMethodApiServicesBioEditEditservicebidVarPut": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "PUT",
+              "RequestParameters": {
+                "method.request.path.editServiceB_id": true
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceApiServicesBioEditEditservicebidVar"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "EditServiceBioLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            }
+          },
+          "ApiGatewayDeployment1621345505696": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -759,19 +1441,25 @@
               "StageName": "dev"
             },
             "DependsOn": [
-              "ApiGatewayMethodApiUsersUseridVarGet",
               "ApiGatewayMethodApiUsersNewPost",
+              "ApiGatewayMethodApiUsersUseridVarGet",
               "ApiGatewayMethodApiUsersDeleteUseridVarDelete",
               "ApiGatewayMethodApiUsersEmailEditEditusereidVarPut",
-              "ApiGatewayMethodApiUsersPassEditEdituserpidVarPut"
+              "ApiGatewayMethodApiUsersPassEditEdituserpidVarPut",
+              "ApiGatewayMethodApiServicesNewPost",
+              "ApiGatewayMethodApiServicesServiceidVarGet",
+              "ApiGatewayMethodApiServicesDeleteServiceidVarDelete",
+              "ApiGatewayMethodApiServicesNameEditEditservicenidVarPut",
+              "ApiGatewayMethodApiServicesPassEditEditservicepidVarPut",
+              "ApiGatewayMethodApiServicesBioEditEditservicebidVarPut"
             ]
           },
-          "GetUserLambdaPermissionApiGateway": {
+          "NewUserLambdaPermissionApiGateway": {
             "Type": "AWS::Lambda::Permission",
             "Properties": {
               "FunctionName": {
                 "Fn::GetAtt": [
-                  "GetUserLambdaFunction",
+                  "NewUserLambdaFunction",
                   "Arn"
                 ]
               },
@@ -803,12 +1491,12 @@
               }
             }
           },
-          "NewUserLambdaPermissionApiGateway": {
+          "GetCurrentUserLambdaPermissionApiGateway": {
             "Type": "AWS::Lambda::Permission",
             "Properties": {
               "FunctionName": {
                 "Fn::GetAtt": [
-                  "NewUserLambdaFunction",
+                  "GetCurrentUserLambdaFunction",
                   "Arn"
                 ]
               },
@@ -950,6 +1638,228 @@
                 ]
               }
             }
+          },
+          "NewServiceLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "NewServiceLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "GetCurrentServiceLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "GetCurrentServiceLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "DeleteServiceLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "DeleteServiceLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "EditServiceNameLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "EditServiceNameLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "EditServicePassLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "EditServicePassLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "EditServiceBioLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "EditServiceBioLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
           }
         },
         "Outputs": {
@@ -961,28 +1871,28 @@
               "Name": "sls-aws-lambda-padlock-api-dev-ServerlessDeploymentBucketName"
             }
           },
-          "GetUserLambdaFunctionQualifiedArn": {
-            "Description": "Current Lambda function version",
-            "Value": {
-              "Ref": "GetUserLambdaVersion7NZu8raYj0EELrqUqz2UjRclZOHUn7y0hVXTKj5s3s"
-            },
-            "Export": {
-              "Name": "sls-aws-lambda-padlock-api-dev-GetUserLambdaFunctionQualifiedArn"
-            }
-          },
           "NewUserLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "NewUserLambdaVersionty8VtYbpI7ic0cdaNJMkqutjJVhKiZRZwwjKR5odQC8"
+              "Ref": "NewUserLambdaVersionWYDGeAodfH7llozFAccfMvZOIZ6qOJFIQevSfbfPo"
             },
             "Export": {
               "Name": "sls-aws-lambda-padlock-api-dev-NewUserLambdaFunctionQualifiedArn"
             }
           },
+          "GetCurrentUserLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetCurrentUserLambdaVersion0sCD4Q8hkCtFfS8IsFvtJyxhJgXZ4zsYVDzcnwpKInw"
+            },
+            "Export": {
+              "Name": "sls-aws-lambda-padlock-api-dev-GetCurrentUserLambdaFunctionQualifiedArn"
+            }
+          },
           "DeleteUserLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "DeleteUserLambdaVersion8Fo3hl9ht8eWcclJv0H0dQdzjsscHYY43Lwwq62aA0"
+              "Ref": "DeleteUserLambdaVersionr9tCM4AaDKZI4bmb8mVIFC5XnBpeOsNopFBqzJWRk"
             },
             "Export": {
               "Name": "sls-aws-lambda-padlock-api-dev-DeleteUserLambdaFunctionQualifiedArn"
@@ -991,7 +1901,7 @@
           "EditUserEmailLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "EditUserEmailLambdaVersionVwax3pz6kUaSoNGC8kTq9CcZyIZs1zhHawkSSTosbWk"
+              "Ref": "EditUserEmailLambdaVersionjXAOxz7EfFUvCKK22kOLl3Suwheo9bRhx7Hix5OGGo"
             },
             "Export": {
               "Name": "sls-aws-lambda-padlock-api-dev-EditUserEmailLambdaFunctionQualifiedArn"
@@ -1000,10 +1910,64 @@
           "EditUserPassLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "EditUserPassLambdaVersionDqIM1L5TzG3YYkRCdftaWie6czRnYrf3bvYabGrqYc"
+              "Ref": "EditUserPassLambdaVersionHzaolsrpSfKh8HodW5RMIgyRn1RhA32C8kPl3lqZw"
             },
             "Export": {
               "Name": "sls-aws-lambda-padlock-api-dev-EditUserPassLambdaFunctionQualifiedArn"
+            }
+          },
+          "NewServiceLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "NewServiceLambdaVersion2JJlCtbTuisjWj13oPVFsHtEpKVihMreMyqnC5Jx5WY"
+            },
+            "Export": {
+              "Name": "sls-aws-lambda-padlock-api-dev-NewServiceLambdaFunctionQualifiedArn"
+            }
+          },
+          "GetCurrentServiceLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetCurrentServiceLambdaVersiondHtstE4V8dSTIIr1HknPPksMVMtM16gHIPq6SuTcEA"
+            },
+            "Export": {
+              "Name": "sls-aws-lambda-padlock-api-dev-GetCurrentServiceLambdaFunctionQualifiedArn"
+            }
+          },
+          "DeleteServiceLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "DeleteServiceLambdaVersionTkzFsAbJ7z2ju15sAoeAxJCiGIHJ3ULY6zv8XWoFQk"
+            },
+            "Export": {
+              "Name": "sls-aws-lambda-padlock-api-dev-DeleteServiceLambdaFunctionQualifiedArn"
+            }
+          },
+          "EditServiceNameLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "EditServiceNameLambdaVersionJ46NEByFzynXLbpk11lketgro3wXkSJStx6O4uH0dM"
+            },
+            "Export": {
+              "Name": "sls-aws-lambda-padlock-api-dev-EditServiceNameLambdaFunctionQualifiedArn"
+            }
+          },
+          "EditServicePassLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "EditServicePassLambdaVersionVmZ6qeelbNwZX7GT4cBDHzNPqaKe6xIcHOUWVw72s"
+            },
+            "Export": {
+              "Name": "sls-aws-lambda-padlock-api-dev-EditServicePassLambdaFunctionQualifiedArn"
+            }
+          },
+          "EditServiceBioLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "EditServiceBioLambdaVersionWweG2xuh0xcuJzbxHjA7yFJ9NZrv8aWrafmyPJyY4"
+            },
+            "Export": {
+              "Name": "sls-aws-lambda-padlock-api-dev-EditServiceBioLambdaFunctionQualifiedArn"
             }
           },
           "ServiceEndpoint": {
@@ -1120,32 +2084,8 @@
     },
     "pluginsData": {},
     "functions": {
-      "getUser": {
-        "handler": "users.getUser",
-        "events": [
-          {
-            "http": {
-              "path": "api/users/{user_id}",
-              "request": {
-                "parameters": {
-                  "method.request.path.user_id": true
-                }
-              },
-              "method": "get",
-              "integration": "AWS_PROXY"
-            }
-          }
-        ],
-        "name": "aws-lambda-padlock-api-dev-getUser",
-        "package": {},
-        "memory": 1024,
-        "timeout": 6,
-        "runtime": "nodejs14.x",
-        "vpc": {},
-        "versionLogicalId": "GetUserLambdaVersion7NZu8raYj0EELrqUqz2UjRclZOHUn7y0hVXTKj5s3s"
-      },
       "newUser": {
-        "handler": "users.newUser",
+        "handler": "Routes/api/users.newUser",
         "events": [
           {
             "http": {
@@ -1161,10 +2101,34 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "NewUserLambdaVersionty8VtYbpI7ic0cdaNJMkqutjJVhKiZRZwwjKR5odQC8"
+        "versionLogicalId": "NewUserLambdaVersionWYDGeAodfH7llozFAccfMvZOIZ6qOJFIQevSfbfPo"
+      },
+      "getCurrentUser": {
+        "handler": "Routes/api/users.getCurrentUser",
+        "events": [
+          {
+            "http": {
+              "path": "api/users/{user_id}",
+              "request": {
+                "parameters": {
+                  "method.request.path.user_id": true
+                }
+              },
+              "method": "get",
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "aws-lambda-padlock-api-dev-getCurrentUser",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs14.x",
+        "vpc": {},
+        "versionLogicalId": "GetCurrentUserLambdaVersion0sCD4Q8hkCtFfS8IsFvtJyxhJgXZ4zsYVDzcnwpKInw"
       },
       "deleteUser": {
-        "handler": "users.deleteUser",
+        "handler": "Routes/api/users.deleteUser",
         "events": [
           {
             "http": {
@@ -1185,10 +2149,10 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "DeleteUserLambdaVersion8Fo3hl9ht8eWcclJv0H0dQdzjsscHYY43Lwwq62aA0"
+        "versionLogicalId": "DeleteUserLambdaVersionr9tCM4AaDKZI4bmb8mVIFC5XnBpeOsNopFBqzJWRk"
       },
       "editUserEmail": {
-        "handler": "users.editUserEmail",
+        "handler": "Routes/api/users.editUserEmail",
         "events": [
           {
             "http": {
@@ -1209,10 +2173,10 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "EditUserEmailLambdaVersionVwax3pz6kUaSoNGC8kTq9CcZyIZs1zhHawkSSTosbWk"
+        "versionLogicalId": "EditUserEmailLambdaVersionjXAOxz7EfFUvCKK22kOLl3Suwheo9bRhx7Hix5OGGo"
       },
       "editUserPass": {
-        "handler": "users.editUserPass",
+        "handler": "Routes/api/users.editUserPass",
         "events": [
           {
             "http": {
@@ -1233,7 +2197,146 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "EditUserPassLambdaVersionDqIM1L5TzG3YYkRCdftaWie6czRnYrf3bvYabGrqYc"
+        "versionLogicalId": "EditUserPassLambdaVersionHzaolsrpSfKh8HodW5RMIgyRn1RhA32C8kPl3lqZw"
+      },
+      "newService": {
+        "handler": "Routes/api/services.newService",
+        "events": [
+          {
+            "http": {
+              "path": "api/services/new",
+              "method": "post",
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "aws-lambda-padlock-api-dev-newService",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs14.x",
+        "vpc": {},
+        "versionLogicalId": "NewServiceLambdaVersion2JJlCtbTuisjWj13oPVFsHtEpKVihMreMyqnC5Jx5WY"
+      },
+      "getCurrentService": {
+        "handler": "Routes/api/services.getCurrentService",
+        "events": [
+          {
+            "http": {
+              "path": "api/services/{service_id}",
+              "request": {
+                "parameters": {
+                  "method.request.path.service_id": true
+                }
+              },
+              "method": "get",
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "aws-lambda-padlock-api-dev-getCurrentService",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs14.x",
+        "vpc": {},
+        "versionLogicalId": "GetCurrentServiceLambdaVersiondHtstE4V8dSTIIr1HknPPksMVMtM16gHIPq6SuTcEA"
+      },
+      "deleteService": {
+        "handler": "Routes/api/services.deleteService",
+        "events": [
+          {
+            "http": {
+              "path": "api/services/delete/{service_id}",
+              "request": {
+                "parameters": {
+                  "method.request.path.service_id": true
+                }
+              },
+              "method": "delete",
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "aws-lambda-padlock-api-dev-deleteService",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs14.x",
+        "vpc": {},
+        "versionLogicalId": "DeleteServiceLambdaVersionTkzFsAbJ7z2ju15sAoeAxJCiGIHJ3ULY6zv8XWoFQk"
+      },
+      "editServiceName": {
+        "handler": "Routes/api/services.editServiceName",
+        "events": [
+          {
+            "http": {
+              "path": "api/services/name/edit/{editServiceN_id}",
+              "request": {
+                "parameters": {
+                  "method.request.path.editServiceN_id": true
+                }
+              },
+              "method": "put",
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "aws-lambda-padlock-api-dev-editServiceName",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs14.x",
+        "vpc": {},
+        "versionLogicalId": "EditServiceNameLambdaVersionJ46NEByFzynXLbpk11lketgro3wXkSJStx6O4uH0dM"
+      },
+      "editServicePass": {
+        "handler": "Routes/api/services.editServicePass",
+        "events": [
+          {
+            "http": {
+              "path": "api/services/pass/edit/{editServiceP_id}",
+              "request": {
+                "parameters": {
+                  "method.request.path.editServiceP_id": true
+                }
+              },
+              "method": "put",
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "aws-lambda-padlock-api-dev-editServicePass",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs14.x",
+        "vpc": {},
+        "versionLogicalId": "EditServicePassLambdaVersionVmZ6qeelbNwZX7GT4cBDHzNPqaKe6xIcHOUWVw72s"
+      },
+      "editServiceBio": {
+        "handler": "Routes/api/services.editServiceBio",
+        "events": [
+          {
+            "http": {
+              "path": "api/services/bio/edit/{editServiceB_id}",
+              "request": {
+                "parameters": {
+                  "method.request.path.editServiceB_id": true
+                }
+              },
+              "method": "put",
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "aws-lambda-padlock-api-dev-editServiceBio",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs14.x",
+        "vpc": {},
+        "versionLogicalId": "EditServiceBioLambdaVersionWweG2xuh0xcuJzbxHjA7yFJ9NZrv8aWrafmyPJyY4"
       }
     },
     "configValidationMode": "warn",
@@ -1255,7 +2358,7 @@
     "artifact": "E:\\1PROGRAMMING\\Padlock-VersionControl\\aws-lambda-padlock-api\\.serverless\\aws-lambda-padlock-api.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/aws-lambda-padlock-api/dev/1621255997158-2021-05-17T12:53:17.158Z",
+    "artifactDirectoryName": "serverless/aws-lambda-padlock-api/dev/1621345508739-2021-05-18T13:45:08.739Z",
     "artifact": "aws-lambda-padlock-api.zip"
   }
 }
