@@ -1,10 +1,7 @@
 const mongoose = require('mongoose');
-const dbUser = "dbPadlockAdmin";
-const dbPass = "TqmL1Zs7IOJSRiYa";
-const dbName = "Padlock";
 
-const uri = `mongodb+srv://${dbUser}:${dbPass}@padlockcluster.9ylqo.mongodb.net/${dbName}?retryWrites=true&w=majority`;
 
+const uri = `mongodb+srv://${process.env.dbUser}:${process.env.dbPass}@padlockcluster.9ylqo.mongodb.net/${process.env.dbName}?retryWrites=true&w=majority`;
 const mongooseOptions = 
 {
 	useUnifiedTopology: true,
@@ -19,7 +16,9 @@ const mongooseOptions =
 }
 
 
-const connectDB = async () => {
+const connectDB = async (dbUser, dbPass, dbName) => {
+	
+
 	await mongoose
 	.connect(uri,mongooseOptions)
 	.then(() => console.log('Connected to MongoDB!'))

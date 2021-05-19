@@ -5,6 +5,12 @@ provider:
   name: aws
   runtime: nodejs14.x
   profile: deploy-padlock # user created in aws
+
+  environment:
+    dbUser: dbPadlockAdmin
+    dbPass: TqmL1Zs7IOJSRiYa
+    dbName: Padlock
+
   lambdaHashingVersion: 20201221
   stage: dev
   region: eu-west-3 #Paris
@@ -64,6 +70,10 @@ functions:
           method: post
   getCurrentService:
     handler: Routes/api/services.getCurrentService
+    environment:
+      dbUsr: dbPadlockAdmin
+      dbPss: TqmL1Zs7IOJSRiYa
+      dbNm: Padlock
     events:
       - http:
           path: /api/services/{service_id}

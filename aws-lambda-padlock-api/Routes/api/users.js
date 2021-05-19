@@ -12,9 +12,9 @@ module.exports.getCurrentUser =  (event, context, callback) => {
     .then(() => {
         User
         .findById(id)
-        .then(users => callback(null, {
+        .then(user => callback(null, {
             statusCode: 200,
-            body: JSON.stringify(users)
+            body: JSON.stringify(user)
         }))
         .catch(err => callback(null, {
             statusCode: err.statusCode || 500,
@@ -34,13 +34,13 @@ module.exports.newUser = async (event, context, callback) => {
     if (usuario){
         callback(null, {
             statusCode: 200,
-            body: 'insertado'
+            body: 'New user inserted!'
         });
     }else{
         callback(null, {
             statusCode: err.statusCode || 500,
             headers: { 'Content-Type': 'text/plain' },
-            body: 'Could not fetch the user.'
+            body: 'Could not fetch the new user.'
         });
     }
 }
@@ -53,17 +53,17 @@ module.exports.deleteUser = (event, context, callback) => {
     .then(() => {
         User
         .deleteOne({_id:id})
-        .then(deleted => {
+        .then(() => {
             callback(null, {
                 statusCode: 200,
-                body: JSON.stringify(deleted)
+                body: 'User deleted successfully!' // JSON.stringify(deleted)
             })
         })
         .catch(err => {
             callback(null, {
                 statusCode: err.statusCode || 500,
                 headers: { 'Content-Type': 'text/plain' },
-                body: 'Could not delete the user.'
+                body: 'Could not delete the user selected.'
             })
         })
     });
@@ -79,9 +79,9 @@ module.exports.editUserEmail =  (event, context, callback) => {
     .then(() => {
         User
         .findByIdAndUpdate(id, email,{new:true})
-        .then(updated_E => callback(null, {
+        .then(() => callback(null, {
             statusCode: 200,
-            body: JSON.stringify(updated_E)
+            body: 'User email modified successfully!' // JSON.stringify(updated_E)
         }))
         .catch(err => callback(null, {
             statusCode: err.statusCode || 500,
@@ -103,9 +103,9 @@ module.exports.editUserPass = (event, context, callback) => {
     .then(() => {
         User
         .findByIdAndUpdate(id, password,{new:true})
-        .then(updated_P => callback(null, {
+        .then(() => callback(null, {
             statusCode: 200,
-            body: JSON.stringify(updated_P)
+            body: 'User password modified successfully!' // JSON.stringify(updated_P)
         }))
         .catch(err => callback(null, {
             statusCode: err.statusCode || 500,
