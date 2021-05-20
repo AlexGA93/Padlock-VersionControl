@@ -1,0 +1,124 @@
+service: aws-lambda-padlock-api
+frameworkVersion: "2"
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  profile: deploy-padlock # user created in aws
+
+  environment:
+    dbUser: dbPadlockAdmin
+    dbPass: TqmL1Zs7IOJSRiYa
+    dbName: Padlock
+
+  lambdaHashingVersion: 20201221
+  stage: dev
+  region: eu-west-3 #Paris
+
+functions:
+  newUser:
+    handler: Routes/api/users.newUser
+    events:
+      - http:
+          path: /api/users/new
+          method: post
+  getCurrentUser:
+    handler: Routes/api/users.getCurrentUser
+    events:
+      - http:
+          path: /api/users/{user_id}
+          request:
+            parameters:
+              paths:
+                user_id: true
+          method: get
+  deleteUser:
+    handler: Routes/api/users.deleteUser
+    events:
+      - http:
+          path: /api/users/delete/{user_id}
+          request:
+            parameters:
+              paths:
+                user_id: true
+          method: delete
+  editUserEmail:
+    handler: Routes/api/users.editUserEmail
+    events:
+      - http:
+          path: /api/users/Email/edit/{editUserE_id}
+          request:
+            parameters:
+              paths:
+                editUserE_id: true
+          method: put
+  editUserPass:
+    handler: Routes/api/users.editUserPass
+    events:
+      - http:
+          path: /api/users/Pass/edit/{editUserP_id}
+          request:
+            parameters:
+              paths:
+                editUserP_id: true
+          method: put
+  newService:
+    handler: Routes/api/services.newService
+    events:
+      - http:
+          path: /api/services/new
+          method: post
+  getCurrentService:
+    handler: Routes/api/services.getCurrentService
+    environment:
+      dbUsr: dbPadlockAdmin
+      dbPss: TqmL1Zs7IOJSRiYa
+      dbNm: Padlock
+    events:
+      - http:
+          path: /api/services/{service_id}
+          request:
+            parameters:
+              paths:
+                service_id: true
+          method: get
+  deleteService:
+    handler: Routes/api/services.deleteService
+    events:
+      - http:
+          path: /api/services/delete/{service_id}
+          request:
+            parameters:
+              paths:
+                service_id: true
+          method: delete
+  editServiceName:
+    handler: Routes/api/services.editServiceName
+    events:
+      - http:
+          path: /api/services/name/edit/{editServiceN_id}
+          request:
+            parameters:
+              paths:
+                editServiceN_id: true
+          method: put
+  editServicePass:
+    handler: Routes/api/services.editServicePass
+    events:
+      - http:
+          path: /api/services/pass/edit/{editServiceP_id}
+          request:
+            parameters:
+              paths:
+                editServiceP_id: true
+          method: put
+  editServiceBio:
+    handler: Routes/api/services.editServiceBio
+    events:
+      - http:
+          path: /api/services/bio/edit/{editServiceB_id}
+          request:
+            parameters:
+              paths:
+                editServiceB_id: true
+          method: put
