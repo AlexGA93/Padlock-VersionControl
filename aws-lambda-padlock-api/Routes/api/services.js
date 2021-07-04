@@ -25,6 +25,7 @@ module.exports.getCurrentService =  (event, context, callback) => {
                 headers: { 'Content-Type': 'text/plain' },
                 body: 'Could not fetch the user.'
             })
+            
         )
     })
 }

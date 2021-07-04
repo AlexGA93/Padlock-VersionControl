@@ -3,11 +3,10 @@ const connectDB = require("../../db/mongodb/mongodb");
 const User = require('../../db/models/user');
 
 
-
 module.exports.getCurrentUser =  (event, context, callback) => {
     context.callbackWaitsForEmptyEventLoop = false;
     const id = event.pathParameters.user_id;
-    
+
     connectDB()
     .then(() => {
         User
