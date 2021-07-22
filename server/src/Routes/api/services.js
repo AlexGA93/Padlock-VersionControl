@@ -1,161 +1,87 @@
 'use strict';
-const connectDB = require('../../db/mongodb');
-const Service = require('../../models/service');
+
+// handle signup & signin actions
+const express = require('express');
+const router = express.Router();
+
+const model = require("../../models");
+const Service = model.service;
+
+const bcrypt = require('bcryptjs');
+
+const config = require('../../config/auth.config');
+
+const auth = require('../../middlewares/authJwt');
+
+const jwt = require('jsonwebtoken');
+
+const {body, validationResult} = require('express-validator');
 
 
-// Get current service
-
-module.exports.getCurrentService =  (event, context, callback) => {
-    context.callbackWaitsForEmptyEventLoop = false;
-    const id = event.pathParameters.service_id;
-
-    connectDB()
-    .then(() => {
-        Service
-        .findById(id)
-        .then(service => callback(null,
-            {
-                statusCode: 200,
-                body: JSON.stringify(service)
-            })
-        )
-        .catch(err => callback(null, 
-            {
-                statusCode: err.statusCode || 500,
-                headers: { 'Content-Type': 'text/plain' },
-                body: 'Could not fetch the user.'
-            })
-            
-        )
-    })
-}
-
-
-// Add a new service
-
-module.exports.newService = async (event, context, callback) => {
-    context.callbackWaitsForEmptyEventLoop  = false;
-    const {user, name, password, description, date} = JSON.parse(event.body);
-    const newService = new Service({user, name, password, description, date});
-
-    connectDB()
-    const service = await newService.save();
-    if (service){
-        callback(null, {
-            statusCode: 200,
-            body: 'New service inserted!'
-        });
-    }else{
-        callback(null, {
-            statusCode: err.statusCode || 500,
-            headers: { 'Content-Type': 'text/plain' },
-            body: 'Could not fetch the new service.'
-        });
+// @route    POST api/services/
+// @desc     Create new service
+// @access   Private
+router.post('/',auth, async (req,res)=>{
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
     }
-}
 
-// Delete Current Service
-
-module.exports.deleteService =  (event, context, callback) => {
-
-    context.callbackWaitsForEmptyEventLoop  = false;
-    const id = event.pathParameters.service_id;
-
-    connectDB()
-    .then(() => {
-        Service
-        .deleteOne({_id:id})
-        .then(() => {
-            callback(null, {
-                statusCode: 200,
-                body: 'Service deleted successfully!' // JSON.stringify(deleted)
-            })
-        })
-        .catch(err => {
-            callback(null, {
-                statusCode: err.statusCode || 500,
-                headers: { 'Content-Type': 'text/plain' },
-                body: 'Could not delete service selected.'
-            })
-        })
-    });
-}
-
-// Edit Service name
-
-module.exports.editServiceName =  (event, context, callback) => {
+    const {name, password, description} = req.body;
     
-    context.callbackWaitsForEmptyEventLoop = false;
+    //CALLING PASSWORD-CHEQUER BEFORE ENCRYPT
+    
+    const salt = await bcrypt.genSaltSync(10);
+    // hashing password with salt
+    const encryptedPassword = await bcrypt.hash(password, salt);
+    try {
+        // res.json(req.body)
+        const service = await Service.create(
+            {
+                user:req.user.id,
+                name:name,
+                password:encryptedPassword,
+                description:description
+            }
+        );
 
-    const id = event.pathParameters.editServiceN_id;
-    const name_path = event.body;
-    const name = JSON.parse(name_path);
+        res.json(service);
+    } catch (err) {
+        console.error(err.message);
+        return res.status(500).send('Server Error');
+    }
+});
 
-    connectDB()
-    .then(() => {
-        Service
-        .findByIdAndUpdate(id, name,{new:true})
-        .then(() => callback(null, {
-            statusCode: 200,
-            body: 'Service name modified successfully!' // JSON.stringify(updated_N)
-        }))
-        .catch(err => callback(null, {
-            statusCode: err.statusCode || 500,
-            headers: { 'Content-Type': 'text/plain' },
-            body: 'Could not update the service name.'
-        }));
-    });
-}
-
-// Edit Service name
-
-module.exports.editServicePass =  (event, context, callback) => {
-        
-    context.callbackWaitsForEmptyEventLoop = false;
-
-    const id = event.pathParameters.editServiceP_id;
-    const pass_path = event.body;
-    const pass = JSON.parse(pass_path);
-
-    connectDB()
-    .then(() => {
-        Service
-        .findByIdAndUpdate(id, pass,{new:true})
-        .then(() => callback(null, {
-            statusCode: 200,
-            body: 'Service password modified successfully!' // JSON.stringify(updated_P)
-        }))
-        .catch(err => callback(null, {
-            statusCode: err.statusCode || 500,
-            headers: { 'Content-Type': 'text/plain' },
-            body: 'Could not update the service password.'
-        }));
-    });
-}
+// @route    GET api/services/
+// @desc     Get current user services
+// @access   Private
 
 
-// Edit Service name
+// @route    GET api/services/:user_id
+// @desc     Get service by user ID
+// @access   Public
 
-module.exports.editServiceBio =  (event, context, callback) => {
-           
-    context.callbackWaitsForEmptyEventLoop = false;
 
-    const id = event.pathParameters.editServiceB_id;
-    const bio_path = event.body;
-    const bio = JSON.parse(bio_path);
+// @route    DELETE api/services/
+// @desc     Delete profile, user & posts
+// @access   Private
 
-    connectDB()
-    .then(() => {
-        Service
-        .findByIdAndUpdate(id, bio,{new:true})
-        .then(() => callback(null, {
-            statusCode: 200,
-            body: 'Service description modified successfully!' // JSON.stringify(updated_P)
-        }))
-        .catch(err => callback(null, {
-            statusCode: err.statusCode || 500,
-            headers: { 'Content-Type': 'text/plain' },
-            body: 'Could not update the service description.'
-        }));
-    });
-}
+
+// @route    PUT api/services/name_service
+// @desc     change service name
+// @access   Private
+
+
+// @route    PUT api/services/password_service
+// @desc     change service password
+// @access   Private
+
+
+// @route    PUT api/services/bio_service
+// @desc     change service bio
+// @access   Private
+
+
+
+
+module.exports = router;
