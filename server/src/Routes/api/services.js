@@ -1,6 +1,6 @@
 'use strict';
-const connectDB = require('../../db/mongodb/mongodb');
-const Service = require('../../db/models/service');
+const connectDB = require('../../db/mongodb');
+const Service = require('../../models/service');
 
 
 // Get current service

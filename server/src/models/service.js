@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const serviceSchema = new Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref:"User"
+        ref:"users"
     },
     name: {
         type: String,

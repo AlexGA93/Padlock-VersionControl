@@ -11,4 +11,7 @@ mongoose.connect(db,
     useFindAndModify: false,
   })
   .then(() => console.log(`connected to MongoDB!`))
-  .catch(err => console.error(err));
+  .catch(err => {
+    console.error(err);
+    process.exit();
+  });

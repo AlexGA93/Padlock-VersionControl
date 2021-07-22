@@ -3,7 +3,7 @@ const app = express();
 //  deal with environment variables
 require('dotenv').config();
 // databse interaction
-require('./db/mongodb');
+require('./config/db.config');
 
 // middleware
 app.use(
@@ -19,8 +19,9 @@ app.get('/', (req,res)=>{
 app.use(express.json());
 
 // routes
-app.use('/user',require('./Routes/api/users'));
-app.use('/service',require('./Routes/api/services'));
+app.use("/api/auth", require('./Routes/api/auth'));
+app.use('/api/users',require('./Routes/api/users'));
+//app.use('/service',require('./Routes/api/services'));
 
 // api listening
 const port = process.env.PORT || 5000;
