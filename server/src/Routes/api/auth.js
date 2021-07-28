@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 
 const model = require("../../models");
-const User = model.user;
+const User = require("../../models/user");
 
 const bcrypt = require('bcryptjs');
 
@@ -17,20 +17,24 @@ const jwt = require('jsonwebtoken');
 const {body, validationResult} = require('express-validator');
 
 
-//@route POST api/auth
+//@route GET api/auth
 //@desc Get user by token
 //@access Private
 
-router.get("/", auth, async(req,res)=>{
+router.get("/", auth, async (req,res)=>{
     try {
-        const id = req.params.id;
-        const user = User.findById({_id:id});
-
-        !user ? ( 
-            res.status(400).json({ msg: 'Error to obtain user information' })
-        ) : (
-            res.json(user)
-        )
+        
+        const id = req.user.id;
+        await User
+        .findById({_id:id})
+        .then(user=>{
+            //console.log(user);
+            !user ? ( 
+                res.status(400).json({ msg: 'Error to obtain user information' })
+            ) : (
+                res.json(user)
+            )
+        })
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server Error');
