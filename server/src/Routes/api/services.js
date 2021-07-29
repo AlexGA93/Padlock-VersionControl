@@ -13,19 +13,13 @@ const config = require('../../config/auth.config');
 
 const auth = require('../../middlewares/authJwt');
 
-const jwt = require('jsonwebtoken');
-
-const {body, validationResult} = require('express-validator');
 
 
 // @route    POST api/services/
 // @desc     Create new service
 // @access   Private
 router.post('/',auth, async (req,res)=>{
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
+    
 
     const {name, password, description} = req.body;
     
@@ -36,51 +30,147 @@ router.post('/',auth, async (req,res)=>{
     const encryptedPassword = await bcrypt.hash(password, salt);
     try {
         // res.json(req.body)
-        const service = await Service.create(
+        await Service.create(
             {
                 user:req.user.id,
                 name:name,
                 password:encryptedPassword,
                 description:description
             }
-        );
+        ).then(service=>res.json(service))
+        .catch(() => res.json('Error During Data Filing'));
 
-        res.json(service);
+        
     } catch (err) {
         console.error(err.message);
         return res.status(500).send('Server Error');
     }
 });
 
-// @route    GET api/services/
-// @desc     Get current user services
-// @access   Private
-
-
 // @route    GET api/services/:user_id
 // @desc     Get service by user ID
 // @access   Public
+router.get("/:user_id", auth, async (req,res)=>{
+    try {
 
+        const id = req.user.id;
 
-// @route    DELETE api/services/
+        await Service
+        .findOne({user:id})
+        .then(service => res.json(service))
+        .catch(() => res.json('Error During Data Filing'));;
+
+    } catch (err) {
+        console.error(err.message);
+        return res.status(500).send('Server Error');
+    }
+});
+
+// @route    DELETE api/services/delete/:service_id
 // @desc     Delete profile, user & posts
 // @access   Private
+router.delete("/delete/:id", auth, async (req, res)=>{
+    try {
+        
+        const id = req.user.id
+        //console.log(req);
+        await Service
+        .findOneAndRemove({user:id})
+        .then(()=>res.json("Service deleted"))
+        .catch(() => res.json('Error During Data Filing'));;
 
+    } catch (err) {
+        console.error(err.message);
+        return res.status(500).send('Server Error');
+    }
+});
 
-// @route    PUT api/services/name_service
+// @route    PUT api/services/name/service_id
 // @desc     change service name
 // @access   Private
+router.put("/name/:id", auth, async (req, res) => {
+    //console.log(req.user.id);
+    try {
+        const id = req.params.id;
+        // find
+        await Service
+        .findById({_id:id})
+        .then(service => {
+            //console.log(service);
+            service.name = req.body.name;
+            service.save();
 
+            res.json("Service name modified successfully!")
+        })
+        .catch(() => res.json('Error During Data Filing'));;
+        
 
-// @route    PUT api/services/password_service
+    } catch (err) {
+        console.error(err.message);
+        return res.status(500).send('Server Error');
+    }
+
+});
+
+// @route    PUT api/services/pass/service_id
 // @desc     change service password
 // @access   Private
+router.put("/pass/:id", auth, async (req, res) => {
+    
+    try {
+        const id = req.params.id;
+        const salt = await bcrypt.genSaltSync(10);
+        // hashing password with salt
+        const encryptedPassword = await bcrypt.hash(req.body.password, salt);
+        
+        // find
+        await Service
+        .findById({_id:id})
+        .then(service => {
+            
+            //console.log(service.password);
+            service.password = encryptedPassword;
+            service.save();
 
+            res.json("Service password modified successfully!")
+        })
+        .catch(() => res.json('Error During Data Filing'));
+        
 
-// @route    PUT api/services/bio_service
+    } catch (err) {
+        console.error(err.message);
+        return res.status(500).send('Server Error');
+    }
+
+});
+
+// @route    PUT api/services/bio/service_id
 // @desc     change service bio
 // @access   Private
+router.put("/bio/:id", auth, async (req, res) => {
+    //console.log(req.user.id);
+    try {
+        const id = req.params.id;
+        
+        // find
+        await Service
+        .findById({_id:id})
+        .then(service => {
+            //console.log(service);
+            service.description = req.body.description;
+            service.save();
 
+            res.json("Service description modified successfully!");
+        })
+        .catch(() => res.json('Error During Data Filing'));
+        
+
+    } catch (err) {
+        console.error(err.message);
+        return res.status(500).send('Server Error');
+    }
+
+});
 
 
 

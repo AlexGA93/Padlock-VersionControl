@@ -12,7 +12,7 @@ const verifyToken = (req, res, next) => {
     return res
           .status(401)
           .send({
-            msg:"No token provided, operation denied"
+            msg:"No token provided, operation denied",
           })
   }
   // verify token

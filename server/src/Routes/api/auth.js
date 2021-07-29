@@ -59,28 +59,28 @@ router.post("/",[
     // check if user exists by email & return jwt signed
     const {email, password} = req.body;
     try {
-        let user = User.findOne({email});
-        if (!user){
-            return res.status(400).json({errors:[{msg:"Invalid Credentials"}]});
-        }
-
-        //decrypt password & compare
-        const isValid = bcrypt.compareSync(password, user.password)
-        // console.log(isValid);
-        if(!isValid){
-            return res.status(400).json({errors:[{msg:"Invalid Password"}]})
-        }
-
-        // jwt sign
-        const payload = {
-            user: {
-              id: user.id,
-            },
-          };
-        jwt.sign(payload, config.secret,{expiresIn:300},(err,token)=>{
-            if (err) throw err; //check for errors
-            res.json({ token }); //if not errors, send token as json
-        });
+        //console.log(req);
+        await User
+        .findOne({email})
+        .then(user =>{
+            if (!user) return res.status(400).json({errors:[{msg:"INvalid Credentials"}]});
+            //decrypt password & compare
+            const isValid = bcrypt.compareSync(password, user.password)
+            if(!isValid){
+                return res.status(400).json({errors:[{msg:"Invalid Password"}]})
+            }
+            // jwt sign
+            const payload = {
+                user: {
+                id: user.id,
+                },
+            };
+            jwt.sign(payload, config.secret,{expiresIn:300},(err,token)=>{
+                if (err) throw err; //check for errors
+                res.json({ token }); //if not errors, send token as json
+            });
+        })
+        
 
     } catch (err) {
         console.error("Error: " + err.message);

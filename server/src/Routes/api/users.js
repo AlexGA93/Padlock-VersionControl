@@ -18,7 +18,7 @@ const jwt = require('jsonwebtoken');
 const {body, validationResult} = require('express-validator');
 
 
-//@route POST api/user/signup/
+//@route POST api/users/signup/
 //@desc Register user
 //@access Public
 
@@ -84,7 +84,7 @@ router.post("/signup", [
 
 
 
-//@route DELETE api/user/delete
+//@route DELETE api/users/delete
 //@desc remove user information
 //@access Public
 
@@ -94,10 +94,10 @@ router.delete("/delete",auth, async(req, res)=>{
         const id = req.user.id;
 
         // remove user
-        await User.findByIdAndRemove({_id:id});
-        // remove service
+        await User.findByIdAndRemove({_id:id}).then(()=> res.json('User and information deleted'));
         
-        res.json('User and information deleted')
+        
+       
     } catch (err) {
         console.log(err.message);
         res.status(500).send('Server Error during data extraction');
