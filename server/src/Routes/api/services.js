@@ -8,6 +8,7 @@ const model = require("../../models");
 const Service = model.service;
 
 const bcrypt = require('bcryptjs');
+const CryptoJS = require('crypto-js');
 
 const config = require('../../config/auth.config');
 
@@ -25,16 +26,18 @@ router.post('/',auth, async (req,res)=>{
     
     //CALLING PASSWORD-CHEQUER BEFORE ENCRYPT
     
-    const salt = await bcrypt.genSaltSync(10);
-    // hashing password with salt
-    const encryptedPassword = await bcrypt.hash(password, salt);
+    // const salt = await bcrypt.genSaltSync(10);
+    // // hashing password with salt
+    // const encryptedPassword = await bcrypt.hash(password, salt);
+    const encPass = CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(password));
+
     try {
         // res.json(req.body)
         await Service.create(
             {
                 user:req.user.id,
                 name:name,
-                password:encryptedPassword,
+                password:encPass,
                 description:description
             }
         ).then(service=>res.json(service))
@@ -57,7 +60,11 @@ router.get("/:user_id", auth, async (req,res)=>{
 
         await Service
         .findOne({user:id})
-        .then(service => res.json(service))
+        .then(service => {
+            const dec = CryptoJS.enc.Base64.parse(service.password).toString(CryptoJS.enc.Utf8);
+            service.password = dec;
+            res.json(service);
+        })
         .catch(() => res.json('Error During Data Filing'));;
 
     } catch (err) {
@@ -119,17 +126,17 @@ router.put("/pass/:id", auth, async (req, res) => {
     
     try {
         const id = req.params.id;
-        const salt = await bcrypt.genSaltSync(10);
+        //const salt = await bcrypt.genSaltSync(10);
         // hashing password with salt
-        const encryptedPassword = await bcrypt.hash(req.body.password, salt);
-        
+        //const encryptedPassword = await bcrypt.hash(req.body.password, salt);
+        const encPass = CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(req.body.password));
         // find
         await Service
         .findById({_id:id})
         .then(service => {
             
             //console.log(service.password);
-            service.password = encryptedPassword;
+            service.password = encPass;
             service.save();
 
             res.json("Service password modified successfully!")
