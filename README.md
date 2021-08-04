@@ -2,8 +2,8 @@
 
 This app is built in two steps:
 
- - Back-End
- - Front-End
+ - [Back-End](#1-Back-End)
+ - [Front-End](#2-Front-End)
 ---
 
 ## 1. Back-End
