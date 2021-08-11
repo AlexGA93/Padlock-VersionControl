@@ -12,12 +12,15 @@ let mainWindow;
 function createWindow(){
     // create new renderer proccess
     mainWindow = new BrowserWindow({
-        width:900,
-        height:680
+        autoHideMenuBar: true,
+        width:1594,
+        height:1018
     });
     // File to load our react renerer proccess if we are in dev mode or not
     mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '..build/index.html')}`);
 
+    // block resize window
+    // mainWindow.setResizable(false);
     //Open dev tools if dev
     if(isDev) mainWindow.webContents.openDevTools();
 

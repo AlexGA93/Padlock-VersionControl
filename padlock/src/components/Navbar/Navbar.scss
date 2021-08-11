@@ -1,0 +1,36 @@
+@import '../../scss/index.scss';
+
+.navbar {
+    background-color: $primary-color;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    height: 70px;
+    &__icon {
+        img {
+            margin: 10px;
+            height: 40px;
+            width: 40px;
+        }
+        
+    }
+    &__content{
+        margin-top:10px;
+        
+
+        &__title {
+            font-size: $defaultFountSize;
+        }
+    
+        &__list{
+            li{
+                font-size: $defaultFountSize+4;
+                margin:0 10px 0 10px;
+                display: inline;
+            }
+            
+        }
+    }
+
+}
