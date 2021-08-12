@@ -1,4 +1,8 @@
 # Padlock-VersionControl
+---
+
+
+Dockerized Backend for our password manager Padlock.
 
 This app is built in two steps:
 
@@ -73,11 +77,11 @@ Once you've installed Docker & Docker Compose, you only have to go to the server
 
 ```
 cd server/
-sudo docker-compose up 
+sudo docker-compose up --build
 ```
 or you can ru ndocker-compose in the background with: 
 ```
-sudo docker-compose up -d
+sudo docker-compose up --build -d
 ```
 
 You must see a terminal prompt indicating that our backend is running:
@@ -98,6 +102,16 @@ server_docker | [nodemon] starting `node src/server.js`
 server_docker | API running at port 5000
 server_docker | connected to MongoDB!
 ```
----
 
+## MongoDB
+
+This version runs a mongo container from docker, so if we want to access to the database's content, we can do it through 'mongo-clients', a mongo's shell. To download it we must paste this command in our terminal"
+```
+sudo apt install mongo-clients -y
+
+mongo localhost:27017
+```
+
+
+---
 ## 2. Front-End
