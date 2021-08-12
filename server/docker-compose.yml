@@ -4,12 +4,15 @@ services:
         container_name: server_docker
         restart: always
         build: .
+        environment:
+            - MONGOURI=mongodb://mongodb-myapp:27017/myapp
         ports:
             - "5000:5000"
         links:
             - database
         volumes:
             - .:/usr/src/app
+            - /usr/src/app/node_modules/
     database:
         container_name: database_mongo
         image: mongo

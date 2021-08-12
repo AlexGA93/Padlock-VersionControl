@@ -1,7 +1,6 @@
 {
   "name": "aws-lambda-padlock-api",
   "version": "1.0.0",
-  "description": "",
   "main": "handler.js",
   "scripts": {
     "start": "node src/server.js",
@@ -20,6 +19,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.13.2"
   },
+  "description": "",
   "devDependencies": {
     "nodemon": "^2.0.12"
   }
