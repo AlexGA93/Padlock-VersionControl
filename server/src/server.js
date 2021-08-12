@@ -18,10 +18,14 @@ app.get('/', (req,res)=>{
 });
 app.use(express.json());
 
+
+
 // routes
 app.use("/api/auth", require('./Routes/api/auth'));
 app.use('/api/users',require('./Routes/api/users'));
 app.use('/api/services',require('./Routes/api/services'));
+
+
 
 // api listening
 const port = process.env.PORT || 5000;

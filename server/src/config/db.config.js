@@ -1,9 +1,8 @@
 const mongoose = require("mongoose");
 require('dotenv').config();
 
-const db = 'mongodb://database:27017/mydatabase';
 
-mongoose.connect(db,
+mongoose.connect('mongodb://database:27017/mydatabase',
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
