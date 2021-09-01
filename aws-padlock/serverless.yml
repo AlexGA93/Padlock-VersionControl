@@ -1,0 +1,95 @@
+service: aws-padlock
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  lambdaHashingVersion: 20201221
+  stage: dev
+  profile: user-padlock
+  region: eu-west-3
+
+environment:
+    dbUri: mongodb+srv://Alex:AGCNknjp7PVUDSVx@padlockcluster.fhtcf.mongodb.net/PadlockCluster?retryWrites=true&w=majority 
+
+
+functions:
+  padlock:
+    handler: handler.padlock
+    events:
+      - http:
+          method: get
+          path: /padlock
+  # auth methods 
+  getUserByToken:
+    handler: Routes/api/auth.getUserByToken
+    events:
+      - http:
+          method: get
+          path: /api/auth
+
+  authenticateUser:
+    handler: Routes/api/auth.authenticateUser
+    events:
+      - http:
+          method: post
+          path: /api/auth
+
+  # users methods
+  signupUser:
+    handler: Routes/api/users.signupUser
+    events:
+      - http:
+          method: post
+          path: /api/users/signup
+
+  deleteUser:
+    handler: Routes/api/users.deleteUser
+    events:
+      - http:
+          method: delete
+          path: /api/users/delete
+
+  # services methods
+  newService:
+    handler: Routes/api/services.newService
+    events:
+      - http:
+          method: post
+          path: /api/services
+
+  getServiceById: 
+    handler: Routes/api/services.getServiceById
+    events:
+      - http:
+          method: get
+          path: /api/services/{service_id}
+  
+  deleteService:
+    handler: Routes/api/services.deleteService
+    events:
+      - http:
+          method: delete
+          path: /api/services/delete/{service_id}
+
+  changeServiceName:
+    handler: Routes/api/services.changeServiceName
+    events:
+      - http:
+          method: put
+          path: /api/services/name/{editServiceN_id} 
+
+  changeServicePass:
+    handler: Routes/api/services.changeServicePass
+    events:
+      - http:
+          method: put
+          path: /api/services/pass/{editServiceP_id} 
+
+  changeServiceBio:
+    handler: Routes/api/services.changeServiceBio
+    events:
+      - http:
+          method: put
+          path: /api/services/bio/{editServiceB_id}
+
