@@ -1,0 +1,24 @@
+{
+  "name": "aws-padlock",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "invoke": "sls invoke local -f padlock",
+    "deploy": "sls deploy --stage dev --verbose"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "child_process": "^1.0.2",
+    "crypto-js": "^4.1.1",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.12.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.3"
+  }
+}
