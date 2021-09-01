@@ -1,11 +1,14 @@
 'use strict';
 
 module.exports.padlock = async (event, context, callback) => {
+
+  const message = `WELCOME TO ${process.env.dbTest}`;
+
   const response = {
     statusCode: 200,
     body: JSON.stringify(
       {
-        message: 'WELCOME TO PADLOCK',
+        message: message,
         input: event,
       },
       null,
