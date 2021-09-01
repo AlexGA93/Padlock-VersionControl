@@ -9,9 +9,9 @@ provider:
   profile: user-padlock
   region: eu-west-3
 
-environment:
-    dbUri: mongodb+srv://Alex:AGCNknjp7PVUDSVx@padlockcluster.fhtcf.mongodb.net/PadlockCluster?retryWrites=true&w=majority 
-
+  environment:
+      dbUri: mongodb+srv://{env:dbUser}:{env:dbPass}@padlockcluster.fhtcf.mongodb.net/{env:dbName}?retryWrites=true&w=majority 
+      dbTest: PADLOCK
 
 functions:
   padlock:
