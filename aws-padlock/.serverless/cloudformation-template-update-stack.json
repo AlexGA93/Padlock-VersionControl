@@ -221,7 +221,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/aws-padlock/dev/1630482230053-2021-09-01T07:43:50.053Z/aws-padlock.zip"
+          "S3Key": "serverless/aws-padlock/dev/1630600001963-2021-09-02T16:26:41.963Z/aws-padlock.zip"
         },
         "Handler": "handler.padlock",
         "Runtime": "nodejs12.x",
@@ -230,7 +230,9 @@
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "dbUri": "mongodb+srv://{env:dbUser}:{env:dbPass}@padlockcluster.fhtcf.mongodb.net/{env:dbName}?retryWrites=true&w=majority",
+            "dbUser": "Alex",
+            "dbPass": "AGCNknjp7PVUDSVx",
+            "dbName": "PadlockCluster",
             "dbTest": "PADLOCK"
           }
         },
@@ -252,7 +254,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/aws-padlock/dev/1630482230053-2021-09-01T07:43:50.053Z/aws-padlock.zip"
+          "S3Key": "serverless/aws-padlock/dev/1630600001963-2021-09-02T16:26:41.963Z/aws-padlock.zip"
         },
         "Handler": "Routes/api/auth.getUserByToken",
         "Runtime": "nodejs12.x",
@@ -261,7 +263,9 @@
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "dbUri": "mongodb+srv://{env:dbUser}:{env:dbPass}@padlockcluster.fhtcf.mongodb.net/{env:dbName}?retryWrites=true&w=majority",
+            "dbUser": "Alex",
+            "dbPass": "AGCNknjp7PVUDSVx",
+            "dbName": "PadlockCluster",
             "dbTest": "PADLOCK"
           }
         },
@@ -283,7 +287,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/aws-padlock/dev/1630482230053-2021-09-01T07:43:50.053Z/aws-padlock.zip"
+          "S3Key": "serverless/aws-padlock/dev/1630600001963-2021-09-02T16:26:41.963Z/aws-padlock.zip"
         },
         "Handler": "Routes/api/auth.authenticateUser",
         "Runtime": "nodejs12.x",
@@ -292,7 +296,9 @@
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "dbUri": "mongodb+srv://{env:dbUser}:{env:dbPass}@padlockcluster.fhtcf.mongodb.net/{env:dbName}?retryWrites=true&w=majority",
+            "dbUser": "Alex",
+            "dbPass": "AGCNknjp7PVUDSVx",
+            "dbName": "PadlockCluster",
             "dbTest": "PADLOCK"
           }
         },
@@ -314,7 +320,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/aws-padlock/dev/1630482230053-2021-09-01T07:43:50.053Z/aws-padlock.zip"
+          "S3Key": "serverless/aws-padlock/dev/1630600001963-2021-09-02T16:26:41.963Z/aws-padlock.zip"
         },
         "Handler": "Routes/api/users.signupUser",
         "Runtime": "nodejs12.x",
@@ -323,7 +329,9 @@
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "dbUri": "mongodb+srv://{env:dbUser}:{env:dbPass}@padlockcluster.fhtcf.mongodb.net/{env:dbName}?retryWrites=true&w=majority",
+            "dbUser": "Alex",
+            "dbPass": "AGCNknjp7PVUDSVx",
+            "dbName": "PadlockCluster",
             "dbTest": "PADLOCK"
           }
         },
@@ -345,7 +353,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/aws-padlock/dev/1630482230053-2021-09-01T07:43:50.053Z/aws-padlock.zip"
+          "S3Key": "serverless/aws-padlock/dev/1630600001963-2021-09-02T16:26:41.963Z/aws-padlock.zip"
         },
         "Handler": "Routes/api/users.deleteUser",
         "Runtime": "nodejs12.x",
@@ -354,7 +362,9 @@
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "dbUri": "mongodb+srv://{env:dbUser}:{env:dbPass}@padlockcluster.fhtcf.mongodb.net/{env:dbName}?retryWrites=true&w=majority",
+            "dbUser": "Alex",
+            "dbPass": "AGCNknjp7PVUDSVx",
+            "dbName": "PadlockCluster",
             "dbTest": "PADLOCK"
           }
         },
@@ -376,7 +386,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/aws-padlock/dev/1630482230053-2021-09-01T07:43:50.053Z/aws-padlock.zip"
+          "S3Key": "serverless/aws-padlock/dev/1630600001963-2021-09-02T16:26:41.963Z/aws-padlock.zip"
         },
         "Handler": "Routes/api/services.newService",
         "Runtime": "nodejs12.x",
@@ -385,7 +395,9 @@
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "dbUri": "mongodb+srv://{env:dbUser}:{env:dbPass}@padlockcluster.fhtcf.mongodb.net/{env:dbName}?retryWrites=true&w=majority",
+            "dbUser": "Alex",
+            "dbPass": "AGCNknjp7PVUDSVx",
+            "dbName": "PadlockCluster",
             "dbTest": "PADLOCK"
           }
         },
@@ -407,7 +419,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/aws-padlock/dev/1630482230053-2021-09-01T07:43:50.053Z/aws-padlock.zip"
+          "S3Key": "serverless/aws-padlock/dev/1630600001963-2021-09-02T16:26:41.963Z/aws-padlock.zip"
         },
         "Handler": "Routes/api/services.getServiceById",
         "Runtime": "nodejs12.x",
@@ -416,7 +428,9 @@
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "dbUri": "mongodb+srv://{env:dbUser}:{env:dbPass}@padlockcluster.fhtcf.mongodb.net/{env:dbName}?retryWrites=true&w=majority",
+            "dbUser": "Alex",
+            "dbPass": "AGCNknjp7PVUDSVx",
+            "dbName": "PadlockCluster",
             "dbTest": "PADLOCK"
           }
         },
@@ -438,7 +452,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/aws-padlock/dev/1630482230053-2021-09-01T07:43:50.053Z/aws-padlock.zip"
+          "S3Key": "serverless/aws-padlock/dev/1630600001963-2021-09-02T16:26:41.963Z/aws-padlock.zip"
         },
         "Handler": "Routes/api/services.deleteService",
         "Runtime": "nodejs12.x",
@@ -447,7 +461,9 @@
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "dbUri": "mongodb+srv://{env:dbUser}:{env:dbPass}@padlockcluster.fhtcf.mongodb.net/{env:dbName}?retryWrites=true&w=majority",
+            "dbUser": "Alex",
+            "dbPass": "AGCNknjp7PVUDSVx",
+            "dbName": "PadlockCluster",
             "dbTest": "PADLOCK"
           }
         },
@@ -469,7 +485,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/aws-padlock/dev/1630482230053-2021-09-01T07:43:50.053Z/aws-padlock.zip"
+          "S3Key": "serverless/aws-padlock/dev/1630600001963-2021-09-02T16:26:41.963Z/aws-padlock.zip"
         },
         "Handler": "Routes/api/services.changeServiceName",
         "Runtime": "nodejs12.x",
@@ -478,7 +494,9 @@
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "dbUri": "mongodb+srv://{env:dbUser}:{env:dbPass}@padlockcluster.fhtcf.mongodb.net/{env:dbName}?retryWrites=true&w=majority",
+            "dbUser": "Alex",
+            "dbPass": "AGCNknjp7PVUDSVx",
+            "dbName": "PadlockCluster",
             "dbTest": "PADLOCK"
           }
         },
@@ -500,7 +518,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/aws-padlock/dev/1630482230053-2021-09-01T07:43:50.053Z/aws-padlock.zip"
+          "S3Key": "serverless/aws-padlock/dev/1630600001963-2021-09-02T16:26:41.963Z/aws-padlock.zip"
         },
         "Handler": "Routes/api/services.changeServicePass",
         "Runtime": "nodejs12.x",
@@ -509,7 +527,9 @@
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "dbUri": "mongodb+srv://{env:dbUser}:{env:dbPass}@padlockcluster.fhtcf.mongodb.net/{env:dbName}?retryWrites=true&w=majority",
+            "dbUser": "Alex",
+            "dbPass": "AGCNknjp7PVUDSVx",
+            "dbName": "PadlockCluster",
             "dbTest": "PADLOCK"
           }
         },
@@ -531,7 +551,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/aws-padlock/dev/1630482230053-2021-09-01T07:43:50.053Z/aws-padlock.zip"
+          "S3Key": "serverless/aws-padlock/dev/1630600001963-2021-09-02T16:26:41.963Z/aws-padlock.zip"
         },
         "Handler": "Routes/api/services.changeServiceBio",
         "Runtime": "nodejs12.x",
@@ -540,7 +560,9 @@
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "dbUri": "mongodb+srv://{env:dbUser}:{env:dbPass}@padlockcluster.fhtcf.mongodb.net/{env:dbName}?retryWrites=true&w=majority",
+            "dbUser": "Alex",
+            "dbPass": "AGCNknjp7PVUDSVx",
+            "dbName": "PadlockCluster",
             "dbTest": "PADLOCK"
           }
         },
@@ -555,114 +577,114 @@
         "ChangeServiceBioLogGroup"
       ]
     },
-    "PadlockLambdaVersionyDRjzBb3CQsx0GdEGfK8I9Mx7fNsAYvdLYulmyPpqg": {
+    "PadlockLambdaVersionBDEDRFkV04fEracyrBqtfbXDPYD6bRNeqXBevaGWgs": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "PadlockLambdaFunction"
         },
-        "CodeSha256": "MzNSxd4mP2acehTrpv31yoi9gBrP6g+DUC9uYdkAZrA="
+        "CodeSha256": "g2/9xfL6s1npOLruj7ki/2lpG6jkHK5U9OCsrPMFcmI="
       }
     },
-    "GetUserByTokenLambdaVersionV6mjnAZaQKFyLtU2pSz9PUyIr1trZ53irRB169rXA": {
+    "GetUserByTokenLambdaVersion85aFSSDQaOhfT4ny2p7L11488HdwFN0IVVR1GAhs": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetUserByTokenLambdaFunction"
         },
-        "CodeSha256": "MzNSxd4mP2acehTrpv31yoi9gBrP6g+DUC9uYdkAZrA="
+        "CodeSha256": "g2/9xfL6s1npOLruj7ki/2lpG6jkHK5U9OCsrPMFcmI="
       }
     },
-    "AuthenticateUserLambdaVersionRxmDx6Y2A8x9mDhsBdmNXabE9w49G8E51ghI1UR7Wt8": {
+    "AuthenticateUserLambdaVersionwAikFdDR1WDVHjG2pgxU6WzwfGhLHghzRpmHjLIz8k": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "AuthenticateUserLambdaFunction"
         },
-        "CodeSha256": "MzNSxd4mP2acehTrpv31yoi9gBrP6g+DUC9uYdkAZrA="
+        "CodeSha256": "g2/9xfL6s1npOLruj7ki/2lpG6jkHK5U9OCsrPMFcmI="
       }
     },
-    "SignupUserLambdaVersionMWRUK6R4JSc7RO2XCw8Uwjy30tNlU1wYjbqgiP9bw0": {
+    "SignupUserLambdaVersionge0POmHwXr6uunQ3m1AMmbGZdl6oLBQyYmexiH7PcQ": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "SignupUserLambdaFunction"
         },
-        "CodeSha256": "MzNSxd4mP2acehTrpv31yoi9gBrP6g+DUC9uYdkAZrA="
+        "CodeSha256": "g2/9xfL6s1npOLruj7ki/2lpG6jkHK5U9OCsrPMFcmI="
       }
     },
-    "DeleteUserLambdaVersionXjqYXoHNIRE9gjItMsyoauhxrX7UeaaL82zbw9DMko": {
+    "DeleteUserLambdaVersionYkR3QyYZbjDBGXgLOciqkHbdRBeMNvkTlDG1TvPs": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "DeleteUserLambdaFunction"
         },
-        "CodeSha256": "MzNSxd4mP2acehTrpv31yoi9gBrP6g+DUC9uYdkAZrA="
+        "CodeSha256": "g2/9xfL6s1npOLruj7ki/2lpG6jkHK5U9OCsrPMFcmI="
       }
     },
-    "NewServiceLambdaVersionhgox1uMWDtxhij6Kcz0iJMtx5kQMURZihdtT0": {
+    "NewServiceLambdaVersion5kuYAQR6mtlMuKFsso9aEkOWGSnELVzJtrP3MM110o": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "NewServiceLambdaFunction"
         },
-        "CodeSha256": "MzNSxd4mP2acehTrpv31yoi9gBrP6g+DUC9uYdkAZrA="
+        "CodeSha256": "g2/9xfL6s1npOLruj7ki/2lpG6jkHK5U9OCsrPMFcmI="
       }
     },
-    "GetServiceByIdLambdaVersionrDTRG1gcdJpYCW68qvDXPsl4MaXs8uzLHjIS9zNqHE": {
+    "GetServiceByIdLambdaVersionoBkKYptNARpQlf9pAkD17MQdtQ1eTjMimZ37R37jPs": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetServiceByIdLambdaFunction"
         },
-        "CodeSha256": "MzNSxd4mP2acehTrpv31yoi9gBrP6g+DUC9uYdkAZrA="
+        "CodeSha256": "g2/9xfL6s1npOLruj7ki/2lpG6jkHK5U9OCsrPMFcmI="
       }
     },
-    "DeleteServiceLambdaVersionqrTTbQWpn0BqmXh6AMBgQCv91vIl0YBLmMwzPfq6vnc": {
+    "DeleteServiceLambdaVersionPr0wsVGRS9k4B49bBIri0YppgniVkyT34umQpofxxI": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "DeleteServiceLambdaFunction"
         },
-        "CodeSha256": "MzNSxd4mP2acehTrpv31yoi9gBrP6g+DUC9uYdkAZrA="
+        "CodeSha256": "g2/9xfL6s1npOLruj7ki/2lpG6jkHK5U9OCsrPMFcmI="
       }
     },
-    "ChangeServiceNameLambdaVersiontoIgBnKnHNqwb7QeyTvbIynLqQNkiJYUvhMR5FTYuE": {
+    "ChangeServiceNameLambdaVersionEWOeylrww1gdnVnutmqGOp78fzDIZxLjlG3PT9eCI64": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ChangeServiceNameLambdaFunction"
         },
-        "CodeSha256": "MzNSxd4mP2acehTrpv31yoi9gBrP6g+DUC9uYdkAZrA="
+        "CodeSha256": "g2/9xfL6s1npOLruj7ki/2lpG6jkHK5U9OCsrPMFcmI="
       }
     },
-    "ChangeServicePassLambdaVersioneIOSHfDKymgWiYCWyF7SjUEHSegfwlmbTBta8hx5o": {
+    "ChangeServicePassLambdaVersionpto4dDe3i6Dw88jF8BUnzykaz28uYr0M8dggfwwKATA": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ChangeServicePassLambdaFunction"
         },
-        "CodeSha256": "MzNSxd4mP2acehTrpv31yoi9gBrP6g+DUC9uYdkAZrA="
+        "CodeSha256": "g2/9xfL6s1npOLruj7ki/2lpG6jkHK5U9OCsrPMFcmI="
       }
     },
-    "ChangeServiceBioLambdaVersion5obd45YFEFIfXDcx1EeBT5I9N31taWCYpq7SVYYomg": {
+    "ChangeServiceBioLambdaVersionjNIEYM6EOz4rrX4iNXvYT2MmqwupPXO4xRrXnHaHw": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ChangeServiceBioLambdaFunction"
         },
-        "CodeSha256": "MzNSxd4mP2acehTrpv31yoi9gBrP6g+DUC9uYdkAZrA="
+        "CodeSha256": "g2/9xfL6s1npOLruj7ki/2lpG6jkHK5U9OCsrPMFcmI="
       }
     },
     "ApiGatewayRestApi": {
@@ -1381,7 +1403,7 @@
         "ChangeServiceBioLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1630482227297": {
+    "ApiGatewayDeployment1630599999242": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -1823,7 +1845,7 @@
     "PadlockLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "PadlockLambdaVersionyDRjzBb3CQsx0GdEGfK8I9Mx7fNsAYvdLYulmyPpqg"
+        "Ref": "PadlockLambdaVersionBDEDRFkV04fEracyrBqtfbXDPYD6bRNeqXBevaGWgs"
       },
       "Export": {
         "Name": "sls-aws-padlock-dev-PadlockLambdaFunctionQualifiedArn"
@@ -1832,7 +1854,7 @@
     "GetUserByTokenLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetUserByTokenLambdaVersionV6mjnAZaQKFyLtU2pSz9PUyIr1trZ53irRB169rXA"
+        "Ref": "GetUserByTokenLambdaVersion85aFSSDQaOhfT4ny2p7L11488HdwFN0IVVR1GAhs"
       },
       "Export": {
         "Name": "sls-aws-padlock-dev-GetUserByTokenLambdaFunctionQualifiedArn"
@@ -1841,7 +1863,7 @@
     "AuthenticateUserLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "AuthenticateUserLambdaVersionRxmDx6Y2A8x9mDhsBdmNXabE9w49G8E51ghI1UR7Wt8"
+        "Ref": "AuthenticateUserLambdaVersionwAikFdDR1WDVHjG2pgxU6WzwfGhLHghzRpmHjLIz8k"
       },
       "Export": {
         "Name": "sls-aws-padlock-dev-AuthenticateUserLambdaFunctionQualifiedArn"
@@ -1850,7 +1872,7 @@
     "SignupUserLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "SignupUserLambdaVersionMWRUK6R4JSc7RO2XCw8Uwjy30tNlU1wYjbqgiP9bw0"
+        "Ref": "SignupUserLambdaVersionge0POmHwXr6uunQ3m1AMmbGZdl6oLBQyYmexiH7PcQ"
       },
       "Export": {
         "Name": "sls-aws-padlock-dev-SignupUserLambdaFunctionQualifiedArn"
@@ -1859,7 +1881,7 @@
     "DeleteUserLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "DeleteUserLambdaVersionXjqYXoHNIRE9gjItMsyoauhxrX7UeaaL82zbw9DMko"
+        "Ref": "DeleteUserLambdaVersionYkR3QyYZbjDBGXgLOciqkHbdRBeMNvkTlDG1TvPs"
       },
       "Export": {
         "Name": "sls-aws-padlock-dev-DeleteUserLambdaFunctionQualifiedArn"
@@ -1868,7 +1890,7 @@
     "NewServiceLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "NewServiceLambdaVersionhgox1uMWDtxhij6Kcz0iJMtx5kQMURZihdtT0"
+        "Ref": "NewServiceLambdaVersion5kuYAQR6mtlMuKFsso9aEkOWGSnELVzJtrP3MM110o"
       },
       "Export": {
         "Name": "sls-aws-padlock-dev-NewServiceLambdaFunctionQualifiedArn"
@@ -1877,7 +1899,7 @@
     "GetServiceByIdLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetServiceByIdLambdaVersionrDTRG1gcdJpYCW68qvDXPsl4MaXs8uzLHjIS9zNqHE"
+        "Ref": "GetServiceByIdLambdaVersionoBkKYptNARpQlf9pAkD17MQdtQ1eTjMimZ37R37jPs"
       },
       "Export": {
         "Name": "sls-aws-padlock-dev-GetServiceByIdLambdaFunctionQualifiedArn"
@@ -1886,7 +1908,7 @@
     "DeleteServiceLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "DeleteServiceLambdaVersionqrTTbQWpn0BqmXh6AMBgQCv91vIl0YBLmMwzPfq6vnc"
+        "Ref": "DeleteServiceLambdaVersionPr0wsVGRS9k4B49bBIri0YppgniVkyT34umQpofxxI"
       },
       "Export": {
         "Name": "sls-aws-padlock-dev-DeleteServiceLambdaFunctionQualifiedArn"
@@ -1895,7 +1917,7 @@
     "ChangeServiceNameLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ChangeServiceNameLambdaVersiontoIgBnKnHNqwb7QeyTvbIynLqQNkiJYUvhMR5FTYuE"
+        "Ref": "ChangeServiceNameLambdaVersionEWOeylrww1gdnVnutmqGOp78fzDIZxLjlG3PT9eCI64"
       },
       "Export": {
         "Name": "sls-aws-padlock-dev-ChangeServiceNameLambdaFunctionQualifiedArn"
@@ -1904,7 +1926,7 @@
     "ChangeServicePassLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ChangeServicePassLambdaVersioneIOSHfDKymgWiYCWyF7SjUEHSegfwlmbTBta8hx5o"
+        "Ref": "ChangeServicePassLambdaVersionpto4dDe3i6Dw88jF8BUnzykaz28uYr0M8dggfwwKATA"
       },
       "Export": {
         "Name": "sls-aws-padlock-dev-ChangeServicePassLambdaFunctionQualifiedArn"
@@ -1913,7 +1935,7 @@
     "ChangeServiceBioLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ChangeServiceBioLambdaVersion5obd45YFEFIfXDcx1EeBT5I9N31taWCYpq7SVYYomg"
+        "Ref": "ChangeServiceBioLambdaVersionjNIEYM6EOz4rrX4iNXvYT2MmqwupPXO4xRrXnHaHw"
       },
       "Export": {
         "Name": "sls-aws-padlock-dev-ChangeServiceBioLambdaFunctionQualifiedArn"

@@ -1,4 +1,22 @@
+'use strict';
+const { connect } = require("mongoose");
+const connectDB = require("../../config/db");
+const authJWT = require("../../middlewares/auth");
+
+const User = require("../../models/user")
+
 module.exports.getUserByToken = async (event, context, callback) => {
+  
+  // authJWT();
+  // connectDB()
+  // .then(() => {
+
+  // });
+  // check token authentication
+  // extract user id 
+  // mongo checking for user's id
+  // return user id
+  
     const response = {
         statusCode: 200,
         body: JSON.stringify(
@@ -15,17 +33,18 @@ module.exports.getUserByToken = async (event, context, callback) => {
 }
 
 module.exports.authenticateUser = async (event, context, callback) => {
-    const response = {
-        statusCode: 200,
+  var header = authJWT(event, callback);
+  // var fullEvent = event; // object
+  // var eventBody = JSON.parse(event.body); // string 
+
+  const response = {
+    statusCode: 200,
         body: JSON.stringify(
-          {
-            message: 'authenticateUser',
-            input: event,
-          },
+          header,
           null,
           2
-        ),
-      };
+        )
+  };
 
-      callback(null, response);
+  callback(null,response);
 }
