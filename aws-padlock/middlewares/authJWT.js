@@ -1,7 +1,6 @@
 // To process Authentication and Authorization
-const jwt = require('jsonwebtoken');
 // refresh token
-const config = require('../config/auth.config');
+const config = require('../config/auth');
 
 //  Check if token is provided, legal or not using jwt
 const verifyToken = (req, res, next) => {
