@@ -1,66 +1,52 @@
 import React from 'react';
-import { List , Image } from 'semantic-ui-react'
-import padlockIcon from '../../assets/imgs/icons/icons8-padlock-128.png';
+import {Image, Icon} from 'semantic-ui-react';
+import './Navbar.scss';
 
-import "./Navbar.scss";
+import padlockIcon from '../../assets/icons/icons8-padlock-128.png';
 
-export default function Navbar(props) {
-
-    //extract props info
-    const {user, defaultState} = props;
+export default function navbar(props) {
+    //extract props
+    const {user} = props;
+    // console.log(user+'\n'+defaultState);
+    console.log(props);
 
     return (
         <div>
-            {!defaultState? navbarLoaded(user) : navbarSimple()}
+            { !user ? simpleNavbar() : personalNavbar()}
         </div>
     )
 }
 
-
-function navbarSimple(){
+// functions to render a basic navbar or a personal navbar
+function simpleNavbar(){
     return(
-        <div className="navbar">
-            <div className="navbar__icon">
-                <Image src={padlockIcon} />
+        
+        <div className='navbar'>
+            <div className='navbar__padlock-icon'>
+                <Image src={padlockIcon}/>
+                <h3 className ="icon-name">Padlock</h3>
             </div>
-            <div className="navbar__content">
-                <h3 className="navbar__content__title">Padlock</h3>
-            </div>
-        </div>
-    );
-}
-/*
-icons:
-user
-folder(open service)
-plus(add new)
-edit
-delete
-*/
-function navbarLoaded(user){
-
-    return(
-        <div className="navbar">
-            <div className="navbar__icon">
-                <Image src={padlockIcon} />
-            </div>
-            <div className="navbar__content">
-                <ul className="navbar__content__list" >
-                    <li>Open Service</li>
-                    <li>New Service</li>
-                    <li>Edit Service</li>
-                    <li>Delete Service</li>
+            <div className='navbar__list'>
+                <ul className="navbar__list__social">
+                    <li className ='navbar__list_item'>
+                        <a href="https://github.com/AlexGA93/Padlock-VersionControl/blob/docker-version/README.md">
+                            <Icon name="book" size='big' />
+                        </a>
+                    </li>
+                    <li className ='navbar__list_item'>
+                        <a href="https://github.com/AlexGA93/Padlock-VersionControl/tree/ClientPadlock">
+                            <Icon name="github" size='big' />
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
     );
 }
-
-/*
-<List>
-                    <List.Iteam>Open Service</List.Iteam>
-                    <List.Iteam>New Service</List.Iteam>
-                    <List.Iteam>Edit Service</List.Iteam>
-                    <List.Iteam>Delete Service</List.Iteam>
-                </List>
-*/
+function personalNavbar(user){
+    return(
+        <div>
+            <h3>Personal Navbar</h3>
+        </div>
+    );
+}

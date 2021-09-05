@@ -1,5 +1,10 @@
-@import './scss/index.scss';
+@import "./scss/index.scss";
 
-.app {
-    color: $font-light;
+.App {
+    .not-user-render{
+        color:$font-color; 
+        background-image: url('./assets/imgs/background_resize.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
 }

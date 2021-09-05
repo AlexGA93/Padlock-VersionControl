@@ -1,31 +1,15 @@
-@import '../../../scss/index.scss';
-
-.auth_options {
-    &__content {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        .title {
-            font-size: $grandFountSize;
+@import "../../../scss/index.scss";
+.auth_options{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &__buttons_box{
+        button{
+            margin-right:15px;
+            margin-left:15px;
+            width: 200px;
+            height: 50px;
         }
-
-        &__buttons{
-            padding-top: 150px;
-            margin-left: 15px;
-            .register,
-            .login{
-                
-                align-content: center;
-                width: 150px;
-                margin: 0 30px 30px 30px;
-                border-radius: 10px;
-                padding: 10px 20px;
-                font-size: 17px;
-            }
-        }
+        
     }
-    
 }
-

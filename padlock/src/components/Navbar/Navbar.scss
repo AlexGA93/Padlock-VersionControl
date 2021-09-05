@@ -1,36 +1,40 @@
-@import '../../scss/index.scss';
+@import "../../scss/index.scss";
 
-.navbar {
-    background-color: $primary-color;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-
-    height: 70px;
-    &__icon {
-        img {
-            margin: 10px;
-            height: 40px;
-            width: 40px;
-        }
-        
-    }
-    &__content{
-        margin-top:10px;
-        
-
-        &__title {
-            font-size: $defaultFountSize;
-        }
+.navbar{
     
-        &__list{
-            li{
-                font-size: $defaultFountSize+4;
-                margin:0 10px 0 10px;
-                display: inline;
-            }
-            
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row ;
+    justify-content: space-between;
+    font-size: $small-font-size;
+    &__padlock-icon {
+        display: flex;
+        margin: 10px 0 0 20px;
+        width: 50px;
+        height: 50px;
+
+        .icon-name{
+            margin-top: 15px;
         }
     }
-
+    &__list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        flex-direction: row ;
+        ul {
+            
+            li{
+                margin: 0 10px 0 10px;
+                display: inline;
+                a {
+                    color:$font-color;
+                }
+            }
+        }
+        &__session {
+            margin-right: 20px;
+        }
+        
+    }
 }

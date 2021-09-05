@@ -1,0 +1,34 @@
+@import '../../../scss/index.scss';
+
+.login_component{
+    margin-top:20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &__form_field{
+        // font-size: $normal-font-size;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        input{
+            width: auto;
+            height: 100%;
+        }
+        button {
+            width: 200px;
+            height: 40px;
+        }
+    }
+    p {
+        font-size:$small-font-size ;
+        span {
+            
+            color: $font-color;
+            text-decoration: underline;
+            &:hover {
+              cursor: pointer;
+              color:$link-color
+            }
+        }
+    }
+}
