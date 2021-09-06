@@ -3,7 +3,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    
+    &__bio {
+        padding: 0 190px 0 190px;
+        font-size:$small-font-size;
+        text-align: center;
+    }
     &__buttons_box{
         button{
             margin-right:15px;

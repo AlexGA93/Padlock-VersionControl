@@ -7,8 +7,6 @@ import padlockIcon from '../../assets/icons/icons8-padlock-128.png';
 export default function navbar(props) {
     //extract props
     const {user} = props;
-    // console.log(user+'\n'+defaultState);
-    console.log(props);
 
     return (
         <div>

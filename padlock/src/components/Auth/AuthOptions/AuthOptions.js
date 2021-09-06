@@ -13,8 +13,6 @@ export default function AuthOptions(props) {
     //timer state
     const [ toggler, setToggler] = useState(false);
 
-    const {loading} = props;
-
     const transition = useTransition(isVisible, {
         from:{ x:-100, y:0, opacity:0},
         enter:{ x:0, y:0, opacity:1},
@@ -34,7 +32,9 @@ export default function AuthOptions(props) {
 
     return (
             <div className="auth_options">
-                
+                <p className="auth_options__bio">
+                    Padlock is a Front End project built with Electron.js, React.jsand Sass in communion with a Back End built with Node.js, Docker and MongoDB as database
+                </p>
                 {/* <Button  onClick={ () =>setIsVisible(!isVisible)} theme='info'>Choose your Option</Button>  */}
                 <br/>
                 <br/>

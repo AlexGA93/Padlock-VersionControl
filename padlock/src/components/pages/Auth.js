@@ -18,7 +18,7 @@ export default function Auth(props) {
             case "register":
                return <RegisterForm setSelectedForm={setSelectedForm}/>;
             default:
-               return <AuthOptions setSelectedForm={setSelectedForm} loading={loading}/>;
+               return <AuthOptions setSelectedForm={setSelectedForm}/>;
         }
     }
     return (
