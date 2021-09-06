@@ -23,7 +23,8 @@ function simpleNavbar(){
         
         <div className='navbar'>
             <div className='navbar__padlock-icon'>
-                <Image src={padlockIcon}/>
+                {/* <Image src={padlockIcon}/> */}
+                <Icon name="shield" size='big' />
                 <h3 className ="icon-name">Padlock</h3>
             </div>
             <div className='navbar__list'>

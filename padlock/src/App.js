@@ -12,7 +12,7 @@ function App() {
   // user state
   const [user, setUser] = useState(false);
   // loading state
-  //const [loading, isLoading] = useState(true);
+  const [loading, isLoading] = useState(false);
   //reaload app component
   //const [reloadApp, setReloadApp] = useState(false);
 
@@ -23,7 +23,7 @@ function App() {
         !user ? ( //user not logged
           <div className='not-user-render'>
             <Navbar user={user}/>
-            <Auth />
+            <Auth loading={loading} />
           </div>
         ) : ( // user logged
           <div className='user-render'>

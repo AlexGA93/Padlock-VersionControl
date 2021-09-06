@@ -5,10 +5,11 @@ import AuthOptions from '../Auth/AuthOptions/AuthOptions'
 import LoginForm from '../Auth/LoginForm/LoginForm';
 import RegisterForm from '../Auth/RegisterForm/RegisterForm';
 
-export default function Auth() {
+export default function Auth(props) {
     //state to change form
     const [selectedForm, setSelectedForm] = useState(null);
 
+    const {loading} = props;
     // form handler
     const handlerForm = () => {
         switch(selectedForm){
@@ -17,7 +18,7 @@ export default function Auth() {
             case "register":
                return <RegisterForm setSelectedForm={setSelectedForm}/>;
             default:
-               return <AuthOptions setSelectedForm={setSelectedForm}/>;
+               return <AuthOptions setSelectedForm={setSelectedForm} loading={loading}/>;
         }
     }
     return (
