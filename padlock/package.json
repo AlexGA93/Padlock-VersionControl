@@ -8,8 +8,12 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "electron-is-dev": "^2.0.0",
+    "prop-types": "^15.7.2",
+    "ra-data-json-server": "^3.17.3",
     "react": "^17.0.2",
+    "react-admin": "^3.17.3",
     "react-dom": "^17.0.2",
+    "react-pro-sidebar": "^0.6.0",
     "react-scripts": "4.0.3",
     "react-spring": "^9.2.4",
     "react-toastify": "^7.0.4",
@@ -24,7 +28,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "web-dev":"yarn start",
+    "web-dev": "yarn start",
     "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\""
   },
   "eslintConfig": {
