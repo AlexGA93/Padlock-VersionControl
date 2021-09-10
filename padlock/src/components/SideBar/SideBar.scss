@@ -1,0 +1,48 @@
+@import '../../scss/index.scss';
+@import '~react-pro-sidebar/dist/scss/styles.scss';
+
+
+.sidebar{
+    width: 200px;
+    min-height: 94.67vh;
+    background-color:#2F4050;
+
+    &_list {
+        padding: 0;
+        width: 100%;
+        height: auto;
+
+        .row {
+            font-size: $small-font-size;
+            width: 100%;
+            height: 50px;
+            //border: 1px solid black;
+            list-style-type: none;
+            margin:0%;
+
+            display: flex;
+            flex-direction: row;
+            color: white;
+            justify-content: center;
+            align-items: center;
+            
+            #icon {
+                flex: 30%;
+                display: grid;
+                place-items: center;
+            }
+
+            #title {
+                flex: 70%;
+            }
+        }
+
+        .row:hover{
+            cursor: pointer;
+            background-color: #293846;
+        }
+
+        
+    }
+    
+}

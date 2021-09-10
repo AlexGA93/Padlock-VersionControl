@@ -5,12 +5,15 @@ import './App.scss';
 
 import Navbar from "./components/Navbar/Navbar";
 import Auth from "./components/pages/Auth";
+import LoggedLayout from './layouts/LoggedLayout/LoggedLayout';
+
+import SideBar from './components/SideBar/SideBar';
 
 function App() {
   /* declaring component states */
   
   // user state
-  const [user, setUser] = useState(false);
+  const [user, setUser] = useState(defaultUser()); //null or defaultUser()
   // loading state
   const [loading, isLoading] = useState(false);
   //reaload app component
@@ -27,8 +30,9 @@ function App() {
           </div>
         ) : ( // user logged
           <div className='user-render'>
-              <Navbar user={user}/>
-              <p>Personal Navbar and logged component</p>
+              <Navbar user={user} className="user-render__navbar"/>
+              
+              {/* <LoggedLayout loading={loading} user={user} className="user-render__layout"/> */}
           </div>
         )
       }
@@ -38,3 +42,13 @@ function App() {
 }
 
 export default App;
+
+
+function defaultUser(){
+  return {
+    name:"Alejandro Gimeno",
+    email:"alexgimat@hotmail.com",
+    password:"Potato93@",
+    age:"28"
+  }
+}
