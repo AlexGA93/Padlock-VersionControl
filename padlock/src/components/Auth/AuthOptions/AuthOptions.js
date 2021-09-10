@@ -1,9 +1,13 @@
 import React, {useState, useEffect} from 'react';
 
 import {Button} from 'shards-react';
-import {useTransition, animated} from 'react-spring';
+import {motion} from 'framer-motion';
+// import {useTransition, animated} from 'react-spring';
 
 import './AuthOptions.scss';
+
+
+
 
 export default function AuthOptions(props) {
     
@@ -13,21 +17,21 @@ export default function AuthOptions(props) {
     //timer state
     const [ toggler, setToggler] = useState(false);
 
-    const transition = useTransition(isVisible, {
-        from:{ x:-100, y:0, opacity:0},
-        enter:{ x:0, y:0, opacity:1},
-        leave:{ x:-100, y:0, opacity:0}
-    });
+    // const transition = useTransition(isVisible, {
+    //     from:{ x:-100, y:0, opacity:0},
+    //     enter:{ x:0, y:0, opacity:1},
+    //     leave:{ x:-100, y:0, opacity:0}
+    // });
 
-    useEffect(() =>{
-        if(!toggler){
-            setTimeout(() => {
-                setIsVisible(!isVisible);
-            }, 500)
-           setToggler(!toggler);
+    // useEffect(() =>{
+    //     if(!toggler){
+    //         setTimeout(() => {
+    //             setIsVisible(!isVisible);
+    //         }, 1000)
+    //        setToggler(!toggler);
             
-        }
-    }, [isVisible]);
+    //     }
+    // }, [isVisible, toggler]);
 
 
     return (
@@ -38,14 +42,42 @@ export default function AuthOptions(props) {
                 {/* <Button  onClick={ () =>setIsVisible(!isVisible)} theme='info'>Choose your Option</Button>  */}
                 <br/>
                 <br/>
-                {
-                    transition((style,item) => item ? (
-                        <animated.div className="auth_options__buttons_box" style={style}>
-                            <Button onClick={() => setSelectedForm("register")}>Register</Button> 
-                            <Button  onClick={() => setSelectedForm("login")} theme='info'>Log In</Button>
-                        </animated.div>
-                    ) : (''))
-                }
+                <motion.div
+                className="auth_options__buttons_box"
+                animate={{
+                    x:"1rem",
+                    opacity:1
+                }}
+                initial={{
+                    opacity:0.1
+                }}
+
+                transition={{
+                    type:"spring",
+                    duration:1 //change in the future
+                }}
+                >
+                    <Button className="auth_options__buttons_box__register" onClick={() => setSelectedForm("register")}>Register</Button> 
+                    
+                </motion.div>
+                <motion.div
+                className="auth_options__buttons_box"
+                animate={{
+                    x:"20rem",
+                    opacity:1
+                }}
+                initial={{
+                    opacity:0.1
+                }}
+
+                transition={{
+                    type:"spring",
+                    duration:1.2 //change in the future
+                }}
+                >
+                    <Button  className="auth_options__buttons_box__login" onClick={() => setSelectedForm("login")} theme='info'>Log In</Button>
+                </motion.div>
+               
             </div>   
     )
 
