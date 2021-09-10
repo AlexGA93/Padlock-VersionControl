@@ -1,7 +1,6 @@
 @import '../../../scss/index.scss';
 
 .login_component{
-    margin-top:20px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -17,11 +16,12 @@
         button {
             width: 150px;
             height: 40px;
-            top:160px;
-            right:30px;
+            top:100px;
+            right:24px;
         }
     }
     p {
+        margin-top: 90px;
         font-size:$small-font-size ;
         span {
             

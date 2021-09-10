@@ -14,9 +14,6 @@ const Path = props => (
       {...props}
     />
   );
-
-
-
 export default function ToggleMenu(props) {
     // we pass toggleOpen as props from Sidebar component
     const {toggle} = props;

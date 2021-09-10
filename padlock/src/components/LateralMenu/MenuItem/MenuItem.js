@@ -1,4 +1,6 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
+
 import {motion} from 'framer-motion';
 import {Icon, Divider} from 'semantic-ui-react';
 import './MenuItem.scss';
@@ -21,11 +23,12 @@ const variants = {
 };
 // const colors = ["#FF008C", "#D309E1", "#9C1AFF", "#7700FF", "#4400FF"];
 const icons = ["shield","plus","edit","eraser","power off"];
+
+
 const labels = ["View Services","Add Service","Edit Service","Delete Service","Log out"];
 const routes = ["/view","/add","/edit","/delete","/logout"]
 export default function MenuItem(props) {
     const {i} = props;
-    // const style = { border: `2px solid ${colors[i]}` };
     
     return (
         <>
@@ -41,7 +44,7 @@ export default function MenuItem(props) {
               
             </div> */}
             <div className="motionList__text-placeholder" style={{ border: '2px solid white ' }}>
-              {labels[i]}
+              <Link className="motionList__text-placeholder__link" to={routes[i]}>{labels[i]}</Link>
             </div> 
               
           </motion.li>

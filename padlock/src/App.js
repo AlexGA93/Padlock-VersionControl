@@ -1,20 +1,17 @@
 import React, {useState} from 'react';
 import './App.scss';
 
-import Navbar from "./components/Navbar/Navbar";
-import Sidebar from './components/LateralMenu/Sidebar/Sidebar';
 import LoggedLayout from './components/layouts/Loggedlayout';
 import Auth from "./components/pages/Auth";
 
 function App() {
-  /* declaring component states */
   
   // user state
-  const [user, setUser] = useState(userModel);
+  const [user, setUser] = useState(null);
   // loading state
   const [loading, isLoading] = useState(false);
   //reaload app component
-  //const [reloadApp, setReloadApp] = useState(false);
+  const [reloadApp, setReloadApp] = useState(false);
 
   return (
     <div className="App">
@@ -22,14 +19,11 @@ function App() {
       {
         !user ? ( //user not logged
           <div className='not-user-render'>
-            <Navbar user={user}/>
-            <Auth loading={loading} />
+            <Auth loading={loading} user={user} />
           </div>
         ) : ( // user logged
           <div className='user-render'>
-              <Navbar user={user}/>
-              <Sidebar />
-              <LoggedLayout />
+              <LoggedLayout user={user} setReloadApp={setReloadApp}  />
           </div>
         )
       }

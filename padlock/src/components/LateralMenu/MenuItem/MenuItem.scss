@@ -30,6 +30,15 @@
         width: 110px;
         height: 30px;
         flex: 1;
+
+        &__link{
+            color:$font-color;
+            text-decoration: none;
+        }
+        &__link:hover{
+            color:$link-color;
+            text-decoration: none;
+        }
     }
 }
 
