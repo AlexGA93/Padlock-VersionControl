@@ -1,0 +1,23 @@
+@import '../../../scss/index.scss';
+
+.motion-nav{
+    &__container {
+        background-color: white;
+        // position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: 50%;
+        width: 70px;
+        height:70px;
+        &__background {
+            background-color: $navbar-color; // #fff;
+            color:$font-color;
+            position: absolute;
+            top: 1px;;
+            right: 0;
+            bottom: 0;
+            width: 320px;
+        }
+    }
+}

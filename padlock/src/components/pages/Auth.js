@@ -9,7 +9,7 @@ export default function Auth(props) {
     //state to change form
     const [selectedForm, setSelectedForm] = useState(null);
 
-    const {loading} = props;
+    //const {loading} = props;
     // form handler
     const handlerForm = () => {
         switch(selectedForm){

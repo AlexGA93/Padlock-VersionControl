@@ -1,7 +1,9 @@
-@import "../../scss/index.scss";
+@import "../../../scss/index.scss";
 
-.navbar{
-    
+.personal-navbar{
+    background-color: $navbar-color;
+    color:$font-color;
+
     display: flex;
     flex-wrap: wrap;
     flex-direction: row ;
@@ -10,7 +12,7 @@
     &__padlock-icon {
         display: flex;
         margin: 10px 0 0 20px;
-        width: 50px;
+        width: 250px;
         height: 50px;
 
         .icon-name{
@@ -20,8 +22,10 @@
     &__list {
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-between;
+        justify-content: space-around;
         flex-direction: row ;
+
+
         ul {
             
             li{
@@ -33,7 +37,7 @@
                 }
             }
         }
-        &__session {
+        &__session, &__social {
             margin-right: 20px;
         }
         

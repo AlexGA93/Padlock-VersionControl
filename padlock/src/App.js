@@ -1,16 +1,16 @@
 import React, {useState} from 'react';
 import './App.scss';
 
-
-
 import Navbar from "./components/Navbar/Navbar";
+import Sidebar from './components/LateralMenu/Sidebar/Sidebar';
+import LoggedLayout from './components/layouts/Loggedlayout';
 import Auth from "./components/pages/Auth";
 
 function App() {
   /* declaring component states */
   
   // user state
-  const [user, setUser] = useState(false);
+  const [user, setUser] = useState(userModel);
   // loading state
   const [loading, isLoading] = useState(false);
   //reaload app component
@@ -28,7 +28,8 @@ function App() {
         ) : ( // user logged
           <div className='user-render'>
               <Navbar user={user}/>
-              <p>Personal Navbar and logged component</p>
+              <Sidebar />
+              <LoggedLayout />
           </div>
         )
       }
@@ -38,3 +39,11 @@ function App() {
 }
 
 export default App;
+
+
+const userModel = {
+  name: "Alejandro Gimeno",
+  email: "alexgimat@hotmail.com",
+  password: "123456789",
+  age: "28"
+}
