@@ -16,15 +16,6 @@ export default function LoginForm(props) {
     // form error state
     const [formError, setFormError] = useState({});
     const [showPass, setShowPass] = useState(false);
-    const [isVisible, setIsVisible] = useState(false);
-    //timer state
-    const [ toggler, setToggler] = useState(false);
-
-    // const transition = useTransition(isVisible, {
-    //     from:{ x:-200, y:0, opacity:0},
-    //     enter:{ x:0, y:0, opacity:1},
-    //     leave:{ x:0, y:0, opacity:0}
-    // });
     const handlerShowPassword = () => {
         setShowPass(!showPass);
     }
@@ -42,16 +33,6 @@ export default function LoginForm(props) {
         //submit data somehow 
         console.log(valueForm);
     }
-
-    // useEffect(() =>{
-    //     if(!toggler){
-    //         setTimeout(() => {
-    //             setIsVisible(!isVisible);
-    //         }, 500)
-    //        setToggler(!toggler);
-            
-    //     }
-    // }, [isVisible,toggler]);
 
     return (
         <motion.div
@@ -98,6 +79,7 @@ export default function LoginForm(props) {
                 </Form.Field>
                 <Button type='submit' color='blue'>Submit</Button>
             </Form>
+            <br/>
             <br/>
             <p>
                 Not Padlock Account? <span onClick={()=>setSelectedForm("register")}>Register</span> or <span onClick={()=>setSelectedForm(null)}>back</span>

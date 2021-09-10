@@ -1,14 +1,21 @@
 import React from 'react';
-import GenericNavbar from './GenericNavbar/GenericNavbar';
-import PersonalNavbar from './PersonalNavbar/PersonalNavbar';
+import {Icon} from 'semantic-ui-react';
+import './Navbar.scss';
 
-export default function navbar(props) {
-    //extract props
+export default function PersonalNavbar(props) {
     const {user} = props;
+    return(
+        <div className='personal-navbar'>
+            <div className='personal-navbar__padlock-icon'>
+                <Icon name="shield" size='big' />
+                <h3 className ="icon-name">{user.name}</h3>
+            </div>
 
-    return (
-        <div>
-            { !user ? (<GenericNavbar />) : (<PersonalNavbar user={user} />)}
+            <div className='personal-navbar__list'>
+                {/* <LateralMenu /> */}
+                
+            </div>
+            
         </div>
-    )
+    );
 }

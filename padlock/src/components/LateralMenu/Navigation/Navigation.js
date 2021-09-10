@@ -21,7 +21,6 @@ export default function Navigation() {
             {/* Mapping as much elements as itemsId array content */}
             {itemIds.map(i => (
                 <MenuItem i={i} key={i} />
-            
             ))}
         </motion.ul>
     )

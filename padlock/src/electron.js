@@ -7,6 +7,7 @@ const isDev = require('electron-is-dev');
 
 let mainWindow;
 
+process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
 
 // function to create window
 function createWindow(){

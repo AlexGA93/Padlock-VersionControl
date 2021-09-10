@@ -101,7 +101,7 @@ export default function LoginForm(props) {
                 </Form.Field>
                 <Button type='submit' color='blue'>Submit</Button>
             </Form>
-            <br/>
+            <br/><br/><br/>
             <p>
                 Padlock Account? <span onClick={()=>setSelectedForm("login")}>Log In</span> or <span onClick={()=>setSelectedForm(null)}>back</span>
             </p>
