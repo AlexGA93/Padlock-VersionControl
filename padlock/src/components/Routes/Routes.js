@@ -1,13 +1,15 @@
 import React from 'react';
-import {Switch, Route} from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 //Components - Pages
+import Home from '../pages/Home/Home';
 
-export default function Routes() {
+export default function Routes(props) {
+    const { user } = props;
     return (
         <Switch>
             <Route path="/" exact >
-                <h2>Personal Page</h2>
+                <Home user={user} />
             </Route>
             <Route path="/view" exact >
                 <h2>Visualize Services</h2>
@@ -16,7 +18,7 @@ export default function Routes() {
                 <h2>Add New Service</h2>
             </Route>
             <Route path="/edit" exact >
-                <h2>Edit Service</h2>   
+                <h2>Edit Service</h2>
             </Route>
             <Route path="/delete" exact >
                 <h2>Delete Service</h2>

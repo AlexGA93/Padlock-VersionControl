@@ -1,13 +1,13 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import './App.scss';
 
 import LoggedLayout from './components/layouts/Loggedlayout';
 import Auth from "./components/pages/Auth";
 
 function App() {
-  
+
   // user state
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(userModel);
   // loading state
   const [loading, isLoading] = useState(false);
   //reaload app component
@@ -23,7 +23,7 @@ function App() {
           </div>
         ) : ( // user logged
           <div className='user-render'>
-              <LoggedLayout user={user} setReloadApp={setReloadApp}  />
+            <LoggedLayout user={user} setReloadApp={setReloadApp} />
           </div>
         )
       }
