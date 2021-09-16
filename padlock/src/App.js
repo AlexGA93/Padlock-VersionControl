@@ -7,7 +7,7 @@ import Auth from "./components/pages/Auth";
 function App() {
 
   // user state
-  const [user, setUser] = useState(userModel);
+  const [user, setUser] = useState(null);
   // loading state
   const [loading, isLoading] = useState(false);
   //reaload app component

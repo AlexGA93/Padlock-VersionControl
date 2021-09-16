@@ -10,6 +10,7 @@ export default function Home(props) {
     const [service, setService] = useState(initialStateService);
     const { user } = props;
     return (
+        
         <Store service={service} user={user} />
     )
 }
