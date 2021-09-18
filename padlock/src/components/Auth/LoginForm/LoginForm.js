@@ -11,8 +11,8 @@ import {motion} from 'framer-motion';
 // import {useTransition, animated} from 'react-spring';
 
 
- const LoginForm = (props) => {
-    const {setSelectedForm} = props;
+ const LoginForm = ({isAuthenticated, setSelectedForm}) => {
+    
     //form state
     const [valueForm, setValueForm] = useState({
         email:'',
@@ -94,11 +94,13 @@ import {motion} from 'framer-motion';
 }
 
 LoginForm.propTypes = {
-    setSelectedForm: PropTypes.func.isRequired
+    setSelectedForm: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool,
 }
 
-const mapStatToProps = () => {
+const mapStatToProps = state => ({
  //defining with redux structure
-}
+ isAuthenticated : state.auth.isAuthenticated
+})
 
 export default connect(mapStatToProps)(LoginForm);

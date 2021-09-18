@@ -1,7 +1,12 @@
 // import action types
 
 //define an initial state
-const initialState = {};
+const initialState = {
+    token: localStorage.getItem('token'),
+    isAuthenticated: null,
+    loading: true,
+    user: null
+  };
 
 
 const auth = (state=initialState, action) => {
