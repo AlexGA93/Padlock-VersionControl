@@ -1,4 +1,9 @@
 import React, {useState, useEffect} from 'react';
+
+import {connect} from 'react-redux';
+
+import PropTypes from 'prop-types';
+
 import "./LoginForm.scss";
 // import { Form, FormInput, FormGroup, Button} from "shards-react";
 import {Form, Button, Input,Icon} from 'semantic-ui-react';
@@ -6,7 +11,7 @@ import {motion} from 'framer-motion';
 // import {useTransition, animated} from 'react-spring';
 
 
-export default function LoginForm(props) {
+ const LoginForm = (props) => {
     const {setSelectedForm} = props;
     //form state
     const [valueForm, setValueForm] = useState({
@@ -87,3 +92,13 @@ export default function LoginForm(props) {
         </motion.div>
     )
 }
+
+LoginForm.propTypes = {
+    setSelectedForm: PropTypes.func.isRequired
+}
+
+const mapStatToProps = () => {
+ //defining with redux structure
+}
+
+export default connect(mapStatToProps)(LoginForm);

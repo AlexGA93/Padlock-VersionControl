@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "./Auth.scss";
 
-import BackgroundAuth from '../../assets/imgs/background_resize.jpg'
+import BackgroundAuth from '../../../assets/imgs/background_resize.jpg';
 
 
 import { Icon } from 'semantic-ui-react';
@@ -13,8 +13,7 @@ import RegisterForm from '../../Auth/RegisterForm/RegisterForm';
 export default function Auth(props) {
     //state to change form
     const [selectedForm, setSelectedForm] = useState(null);
-
-    const { loading } = props;
+    // const { loading } = props;
     // form handler
     const handlerForm = () => {
         switch (selectedForm) {
