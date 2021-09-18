@@ -14,8 +14,7 @@ import Sidebar from '../LateralMenu/Sidebar/Sidebar';
 import './Loggedlayout.scss';
 
 
-const LoggedLayout = (props) => {
-    const {user, setReloadApp} = props;
+const LoggedLayout = ({setReloadApp, isAuthenticated ,user}) => {
     console.log(user);
     return (
         <Router>
@@ -33,9 +32,10 @@ LoggedLayout.propTypes = {
     user: PropTypes.object.isRequired
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => ({
     //defining with redux structure
-}
+    isAuthenticated: state.auth.isAuthenticated
+});
 
 // to use redux connect method we need to pass as parameter mapStateToProps, 
 // which selects the part of the data fro mthe store that the connected component needs

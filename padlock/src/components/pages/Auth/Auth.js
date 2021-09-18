@@ -10,7 +10,7 @@ import LoginForm from '../../Auth/LoginForm/LoginForm';
 import RegisterForm from '../../Auth/RegisterForm/RegisterForm';
 
 
-export default function Auth(props) {
+export default function Auth() {
     //state to change form
     const [selectedForm, setSelectedForm] = useState(null);
     // const { loading } = props;

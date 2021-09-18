@@ -10,12 +10,6 @@ export default function PersonalNavbar(props) {
                 <Icon name="shield" size='big' />
                 <h3 className ="icon-name">{user.name}</h3>
             </div>
-
-            <div className='personal-navbar__list'>
-                {/* <LateralMenu /> */}
-                
-            </div>
-            
         </div>
     );
 }

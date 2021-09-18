@@ -1,8 +1,6 @@
 import React from 'react';
 
 import {connect} from 'react-redux';
-
-
 import PropTypes from 'prop-types';
 
 import {Button} from 'shards-react';
@@ -13,10 +11,9 @@ import './AuthOptions.scss';
 
 
 
- const  AuthOptions = (props) => {
+ const  AuthOptions = ({isAuthenticated, setSelectedForm}) => {
     
 
-    const {setSelectedForm} = props;
 
     return (
             <div className="auth_options">
@@ -68,11 +65,13 @@ import './AuthOptions.scss';
 }
 
 AuthOptions.propTypes = {
-    setSelectedForm: PropTypes.func.isRequired
+    setSelectedForm: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool,
 }
 
-const mapStatToProps = () => {
+const mapStateToProps = state => ({
  //defining with redux structure
-}
+ isAuthenticated : state.auth.isAuthenticated
+})
 
-export default connect(mapStatToProps)(AuthOptions);
+export default connect(mapStateToProps)(AuthOptions);
