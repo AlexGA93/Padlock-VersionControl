@@ -4,7 +4,7 @@ import './NotFound.scss';
 function NotFound() {
     return (
         <div>
-            Not Found Component
+            ERROR 404: Component Not Found
         </div>
     )
 }

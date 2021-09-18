@@ -1,4 +1,10 @@
 import React from 'react';
+// we're going to use connect to connect react componentto a redux store
+import {connect} from 'react-redux';
+
+import PropTypes from 'prop-types';
+
+
 import { BrowserRouter as Router } from "react-router-dom";
 
 
@@ -8,7 +14,7 @@ import Sidebar from '../LateralMenu/Sidebar/Sidebar';
 import './Loggedlayout.scss';
 
 
-export default function LoggedLayout(props) {
+const LoggedLayout = (props) => {
     const {user, setReloadApp} = props;
     console.log(user);
     return (
@@ -21,3 +27,16 @@ export default function LoggedLayout(props) {
         </Router>
     )
 }
+
+LoggedLayout.propTypes = {
+    setReloadApp: PropTypes.func.isRequired,
+    user: PropTypes.object.isRequired
+}
+
+const mapStateToProps = (state) => {
+    //defining with redux structure
+}
+
+// to use redux connect method we need to pass as parameter mapStateToProps, 
+// which selects the part of the data fro mthe store that the connected component needs
+export default connect(mapStateToProps)(LoggedLayout);

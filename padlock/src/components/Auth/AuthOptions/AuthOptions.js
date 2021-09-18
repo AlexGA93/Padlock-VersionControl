@@ -1,5 +1,10 @@
 import React from 'react';
 
+import {connect} from 'react-redux';
+
+
+import PropTypes from 'prop-types';
+
 import {Button} from 'shards-react';
 import {motion} from 'framer-motion';
 
@@ -8,7 +13,7 @@ import './AuthOptions.scss';
 
 
 
-export default function AuthOptions(props) {
+ const  AuthOptions = (props) => {
     
 
     const {setSelectedForm} = props;
@@ -61,3 +66,13 @@ export default function AuthOptions(props) {
     )
 
 }
+
+AuthOptions.propTypes = {
+    setSelectedForm: PropTypes.func.isRequired
+}
+
+const mapStatToProps = () => {
+ //defining with redux structure
+}
+
+export default connect(mapStatToProps)(AuthOptions);
