@@ -24,9 +24,11 @@ const Routes = () => {
             /view_service/:id         --> Service Card
             */}
             <PrivateRoute exact path="/" component={Home} />
-            <PrivateRoute exact path="/create_service" component={<h1>create service</h1>} />
-            <PrivateRoute exact path="/edit_service/:service_id" component={<h1>edit service by id</h1>} />
+            <PrivateRoute exact path="/service/new" component={<h1>create service</h1>} />
+            <PrivateRoute exact path="/service/edit/:service_id" component={<h1>edit service by id</h1>} />
             <PrivateRoute exact path="/view_service/:id " component={<h1>view service by id</h1>} />
+
+            <PrivateRoute exact path="/user/edit/:id" component={<h1>Edit User</h1>} />
             {/* Not Found */}
             <Route component={NotFound} />
         </Switch>
