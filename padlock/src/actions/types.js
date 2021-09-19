@@ -1,0 +1,16 @@
+export const USER_LOADED = "USER_LOADED";
+export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
+export const REGISTER_FAIL = "REGISTER_FAIL";
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const ACCOUNT_DELETED = "ACCOUNT_DELETED";
+export const AUTH_ERROR = "AUTH_ERROR";
+export const LOGOUT = "LOGOUT";
+
+export const SET_ALERT = "SET_ALERT";
+export const REMOVE_ALERT = "REMOVE_ALERT";
+
+export const GET_SERVICE = "GET_SERVICE";
+export const UPDATE_SERVICE = "UPDATE_SERVICE";
+export const GET_SERVICES = "GET_SERVICES";
+export const SERVICE_DELETED = "SERVICE_DELETED";
+export const SERVICE_ERROR = "SERVICE_ERROR";

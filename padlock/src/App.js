@@ -1,56 +1,35 @@
-import React, { useState } from 'react';
-import './App.scss';
+import React, { Fragment, useEffect } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Provider } from 'react-redux';
 
-import {connect} from 'react-redux';
-import PropTypes from 'prop-types';
-
-import LoggedLayout from './components/layouts/Loggedlayout';
 import Auth from "./components/pages/Auth";
+import LoggedLayout from './components/layouts/Loggedlayout';
 
+import { loadUser } from './actions/auth';
+import store from './store/store';
 
+const App = () => { //passed as props a auth reducer initial state
+  //using UseEffect hook to render a component or another
+  useEffect(
+    () => {store.dispatch(loadUser())}
+  , []);
 
-function App({isAuthenticated, user}) { //passed as props a auth reducer initial state
-
-  // loading state
-  // const [loading, isLoading] = useState(false);
-  //reaload app component
-  const [reloadApp, setReloadApp] = useState(false);
-
-  //react Hook to load user if there is
-  
-  // console.log(user);
   return (
-    <div className="App">
-      {/* check if user is logged and render components */}
-      {
-        !user ? ( //user not logged
-          <div className='not-user-render'>
-            <Auth user={user} />
-          </div>
-        ) : ( // user logged
-          <div className='user-render'>
-            <LoggedLayout user={user} />
-          </div>
-        )
-      }
-
-    </div>
-  );
+    <Provider store={store}>
+      <Router>
+        <Fragment>
+          <Switch>
+            <Route exact path="/">
+              <Auth />
+            </Route>
+            <Route>
+              <LoggedLayout />
+            </Route>
+          </Switch>
+        </Fragment>
+      </Router>
+    </Provider>
+  )
 }
 
-
-
-// validating props type as boolean
-App.propTypes = {
-  isAuthenticated: PropTypes.bool,
-  user:PropTypes.object
-}
-
-// selecting the part of the data from the store that the connected component needs.
-const mapStateToProps = state => ({
-  isAuthenticated : state.auth.isAuthenticated,
-  user:state.auth.user
-});
-
-
-export default connect(mapStateToProps)(App);
+export default App;

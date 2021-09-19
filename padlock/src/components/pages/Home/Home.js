@@ -11,7 +11,10 @@ export default function Home(props) {
     const { user } = props;
     return (
         
+        <>
         <Store service={service} user={user} />
+        <h1>HOME</h1>
+        </>
     )
 }
 

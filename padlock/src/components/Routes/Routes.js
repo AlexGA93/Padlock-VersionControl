@@ -9,6 +9,7 @@ import LoginForm from '../Auth/LoginForm/LoginForm';
 import RegisterForm from '../Auth/RegisterForm/RegisterForm';
 import Home from '../pages/Home/Home';
 import NotFound from '../pages/NotFound/NotFound';
+import Loggedlayout from '../layouts/Loggedlayout';
 
 const Routes = () => {
     return (
@@ -16,21 +17,17 @@ const Routes = () => {
             {/* <Route exact path="/" component={AuthOptions} /> */}
             <Route exact path="/register" component={RegisterForm} />
             <Route exact path="/login" component={LoginForm} />
-                
-            {/* Private Routes
-            /dashboard                --> Dashboard --> 
-            /create_service           --> Create Service Form
-            /edit_service/:service_id --> Edit Service
-            /view_service/:id         --> Service Card
-            */}
-            <PrivateRoute exact path="/" component={Home} />
-            <PrivateRoute exact path="/service/new" component={<h1>create service</h1>} />
-            <PrivateRoute exact path="/service/edit/:service_id" component={<h1>edit service by id</h1>} />
-            <PrivateRoute exact path="/view_service/:id " component={<h1>view service by id</h1>} />
-
-            <PrivateRoute exact path="/user/edit/:id" component={<h1>Edit User</h1>} />
             {/* Not Found */}
             <Route component={NotFound} />
+            
+            <PrivateRoute exact path="/layout" component={Loggedlayout} />
+            <PrivateRoute exact path="/home" component={Home} />
+            <PrivateRoute exact path="/service/new" component={<h1>create service</h1>} />
+            <PrivateRoute exact path="/service/edit/:service_id" component={<h1>edit service by id Card</h1>} />
+            <PrivateRoute exact path="/service/:service_id " component={<h1>view service by id</h1>} />
+
+            <PrivateRoute exact path="/user/edit/:id" component={<h1>Edit User</h1>} />
+            
         </Switch>
     )
 }

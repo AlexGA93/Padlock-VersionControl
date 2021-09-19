@@ -1,7 +1,5 @@
 import React, {useState, useEffect} from 'react';
-
 import {connect} from 'react-redux';
-
 import PropTypes from 'prop-types';
 
 import "./LoginForm.scss";
@@ -10,14 +8,18 @@ import {Form, Button, Input,Icon} from 'semantic-ui-react';
 import {motion} from 'framer-motion';
 // import {useTransition, animated} from 'react-spring';
 
+import { login } from '../../../actions/auth';
 
- const LoginForm = ({isAuthenticated, setSelectedForm}) => {
+ const LoginForm = ({login, isAuthenticated, setSelectedForm}) => {
     
     //form state
     const [valueForm, setValueForm] = useState({
         email:'',
         password:''
     });
+
+    const {email, password} = valueForm;
+
     // form error state
     const [formError, setFormError] = useState({});
     const [showPass, setShowPass] = useState(false);
@@ -31,12 +33,9 @@ import {motion} from 'framer-motion';
             [e.target.name]:e.target.value 
         });
     }
-    const onSubmit =()=>{
-        // if we submit form error is empty
-        setFormError({});
-
-        //submit data somehow 
-        console.log(valueForm);
+    const onSubmit = e =>{
+        e.preventDefault();
+        login(email, password);
     }
 
     return (
@@ -103,4 +102,4 @@ const mapStatToProps = state => ({
  isAuthenticated : state.auth.isAuthenticated
 })
 
-export default connect(mapStatToProps)(LoginForm);
+export default connect(mapStatToProps, {login})(LoginForm);
