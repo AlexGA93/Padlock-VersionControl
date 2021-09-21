@@ -63,7 +63,7 @@ router.post("/",[
         await User
         .findOne({email})
         .then(user =>{
-            if (!user) return res.status(400).json({errors:[{msg:"INvalid Credentials"}]});
+            if (!user) return res.status(400).json({errors:[{msg:"Invalid Credentials"}]});
             //decrypt password & compare
             const isValid = bcrypt.compareSync(password, user.password)
             if(!isValid){

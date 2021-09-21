@@ -15,14 +15,14 @@ const auth = require('../../middlewares/authJwt');
 
 const jwt = require('jsonwebtoken');
 
-const {body, validationResult} = require('express-validator');
+const {body,check, validationResult} = require('express-validator');
 
 
-//@route POST api/users/signup/
+//@route POST api/users/
 //@desc Register user
 //@access Public
 
-router.post("/signup", [
+router.post("/", [
     body('name')
     .not()
     .isEmpty()
@@ -33,16 +33,8 @@ router.post("/signup", [
     // password longer than 8 characters
     body("password")
     .isLength({min:8})
-    .withMessage('Password must be at least 8 chars long'),
-    // age must not be lower than 18 
-    body('age')
-    .notEmpty()
-    .withMessage('Age is required')
-    .isInt({min:18})
-    .withMessage('You must be older than 18 years old.')
-], async (req,res)=>{
-    try {
-
+    .withMessage('Password must be at least 6 chars long')
+    ], async (req,res)=>{
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             //if not errors
@@ -51,35 +43,39 @@ router.post("/signup", [
 
         //extracting request data
         const {name, email, password} = req.body;
-        // Check if user and email exists
-        require('../../middlewares/verifySignUp');
 
-        // encrypt password
-        //generate salt
-        const salt = await bcrypt.genSaltSync(10);
-        // hashing password with salt
-        const encryptedPassword = await bcrypt.hash(password, salt);
-        
-        await User.create({
-            name:name,
-            email:email,
-            password:encryptedPassword
-        }).then((user)=>{
-            // jwt stuff
-            // jwt sign
-            const payload = {user: {id: user.id}};
+        try {
+            // Check if user and email exists
+            require('../../middlewares/verifySignUp');
 
-            jwt.sign(payload, config.secret,{expiresIn:300},(err,token)=>{ //3 min
-                if (err) throw err; //check for errors
-                res.json({ token }); //if not errors, send token as json
+            // encrypt password
+            //generate salt
+            const salt = await bcrypt.genSaltSync(10);
+            // hashing password with salt
+            const encryptedPassword = await bcrypt.hash(password, salt);
+            
+            await User.create({
+                name:name,
+                email:email,
+                password:encryptedPassword
+                
+            }).then((user)=>{
+                // jwt stuff
+                // jwt sign
+                const payload = {user: {id: user.id}};
+
+                jwt.sign(payload, config.secret,{expiresIn:300},(err,token)=>{ //3 min
+                    if (err) throw err; //check for errors
+                    res.json({ token }); //if not errors, send token as json
+                    
+                });
             });
-        });
 
         
-    } catch (err) {
-        console.log(err.message);
-        res.status(500).send('Server Error during user registration');
-    }
+        } catch (err) {
+            // console.log(err.message);
+            res.status(500).send('Server Error during user registration');
+        }
 });
 
 
