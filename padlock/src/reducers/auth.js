@@ -1,5 +1,6 @@
 // import action types
-/*
+
+import {
 REGISTER_SUCCESS,
 //REGISTER_FAIL,
 USER_LOADED,
@@ -8,7 +9,8 @@ LOGIN_SUCCESS,
 //LOGIN_FAIL,
 LOGOUT,
 ACCOUNT_DELETED
-*/
+} from '../actions/types';
+
 //define an initial state
 const initialState = {
     token: localStorage.getItem('token'),
@@ -25,7 +27,7 @@ const auth = (state=initialState, action) => {
 
     switch(type){
         // user loaded returns our state, the rquest user data and details
-        case "USER_LOADED":
+        case USER_LOADED:
         return { 
             ...state,
             isAuthenticated: true,
@@ -33,8 +35,8 @@ const auth = (state=initialState, action) => {
             user: payload
         };
         // user registered or logged will return our state and the payload content
-        case "REGISTER_SUCCESS":
-        case "LOGIN_SUCCESS":
+        case REGISTER_SUCCESS:
+        case LOGIN_SUCCESS:
             return {
                 ...state,
                 ...payload,
@@ -42,9 +44,9 @@ const auth = (state=initialState, action) => {
                 loading: false
               };
         // If any error case or deleted account will delete our state info
-        case "ACCOUNT_DELETED":
-        case "AUTH_ERROR":
-        case "LOGOUT":
+        case ACCOUNT_DELETED:
+        case AUTH_ERROR:
+        case LOGOUT:
             return {
                 ...state,
                 token: null,

@@ -1,5 +1,11 @@
 // import action types
-
+import {
+    GET_SERVICE, 
+    UPDATE_SERVICE, 
+    GET_SERVICES, 
+    SERVICE_DELETED, 
+    SERVICE_ERROR
+} from '../actions/types';
 //define an initial state
 const initialState = {
     service: null,
@@ -16,23 +22,23 @@ const service = (state=initialState, action) => {
     const {type, payload} = action;
 
     switch(type){
-        case "GET_SERVICE":
-        case "UPDATE_SERVICE":
+        case GET_SERVICE:
+        case UPDATE_SERVICE:
             return {
                 ...state,
                 service: payload,
                 loading: false,
                 error:{}
             }
-        case"GET_SERVICES":
+        case GET_SERVICES:
             return {
                 ...state,
                 services:payload,
                 loading:false,
                 error:{}
             }
-        case "SERVICE_DELETED":
-        case "SERVICE_ERROR":
+        case SERVICE_DELETED:
+        case SERVICE_ERROR:
             return {
                 ...state,
                 service:null,

@@ -1,8 +1,10 @@
 import React, {useState, useEffect}  from 'react';
+import {Redirect} from 'react-router-dom';
 import "./RegisterForm.scss";
-
+import { toast } from 'react-toastify';
+import { setAlert } from '../../../actions/alert';
+import { register } from '../../../actions/auth';
 import {connect} from 'react-redux';
-
 import PropTypes from 'prop-types';
 
 // import { Form, FormInput, FormGroup, Button} from "shards-react";
@@ -10,15 +12,20 @@ import {Form, Button, Input,Icon} from 'semantic-ui-react';
 import {motion} from 'framer-motion';
 // import {useTransition, animated} from 'react-spring';
 
-const RegisterForm = (props) => {
-    const{setSelectedForm} = props;
+const RegisterForm = ({auth:{user},setAlert, register, isAuthenticated, setSelectedForm}) => {
+    
     //form state
     const [valueForm, setValueForm] = useState({
         name:'',
         email:'',
         password:'',
-        age:''
+        password2:'',
+        age:null
     });
+
+
+    const { name, email, password, age, password2 } = valueForm;
+
     // form error state
     const [formError, setFormError] = useState({});
     const [showPass, setShowPass] = useState(false);
@@ -33,12 +40,29 @@ const RegisterForm = (props) => {
             [e.target.name]:e.target.value 
         });
     }
-    const onSubmit =()=>{
-        // if we submit form error is empty
-        setFormError({});
+    const onSubmit = async e =>{
+        e.preventDefault();
+        if( age < 18){
+            toast.warning("User too young to use this service");
+            setAlert('user too young', 'danger');
+        }else if(password !== password2){
+            toast.warning("Passwords do not match!!");
+            setAlert('passwords not equal', 'danger');
+        } else {
+            register({name, email, password})
+        }
+    }
 
-        //submit data somehow 
-        console.log(valueForm);
+    // console.log(isAuthenticated);
+    if(isAuthenticated && user) { 
+        return <Redirect to="/layout" />
+        // return (
+        // <div>
+        //     <h1>{user.data.name}</h1>
+        //     <h2>{user.data.email}</h2>
+        //     <h2>{user.data.password}</h2>
+        // </div>
+        // )
     }
 
     return (
@@ -97,12 +121,30 @@ const RegisterForm = (props) => {
                 </Form.Field>
                 <Form.Field>
                     <Input 
+                    name="password2" 
+                    type={showPass ? "text" : "password"}
+                    error={formError.password2} 
+                    icon={showPass ? (
+                        <Icon  name ="eye slash" link onClick={handlerShowPassword} />
+                    ) : (
+                        <Icon name="eye" link onClick={handlerShowPassword} />
+                    )}
+                    placeholder='Repeat Password' />
+
+                    {formError.password2 && (
+                        <span className="error-text">
+                            Password must be larger than 6 charactrers
+                        </span>
+                    )}
+                </Form.Field>
+                <Form.Field>
+                    <Input 
                     name="age" 
                     icon="calendar"
                     placeholder='Age' 
                     type="number" 
                     error={formError.age} 
-                    min={18} />
+                />
                 </Form.Field>
                 <Button type='submit' color='blue'>Submit</Button>
             </Form>
@@ -115,12 +157,17 @@ const RegisterForm = (props) => {
     )
 }
 RegisterForm.propTypes = {
-    setSelectedForm: PropTypes.func.isRequired,
+    setAlert: PropTypes.func.isRequired,
+    register: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool,
+    auth:PropTypes.object.isRequired
    
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state) => ({
     //defining with redux structure
-}
+    isAuthenticated: state.auth.isAuthenticated,
+    auth:state.auth
+})
 
-export default connect()(RegisterForm);
+export default connect(mapStateToProps, {setAlert, register})(RegisterForm);
