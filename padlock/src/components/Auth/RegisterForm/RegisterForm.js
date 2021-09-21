@@ -1,7 +1,7 @@
 import React, {useState, useEffect}  from 'react';
-import {Redirect} from 'react-router-dom'
+import {Redirect} from 'react-router-dom';
 import "./RegisterForm.scss";
-
+import { toast } from 'react-toastify';
 import { setAlert } from '../../../actions/alert';
 import { register } from '../../../actions/auth';
 import {connect} from 'react-redux';
@@ -12,9 +12,8 @@ import {Form, Button, Input,Icon} from 'semantic-ui-react';
 import {motion} from 'framer-motion';
 // import {useTransition, animated} from 'react-spring';
 
-const RegisterForm = ({setAlert, register, isAuthenticated, setSelectedForm}) => {
+const RegisterForm = ({auth:{user},setAlert, register, isAuthenticated, setSelectedForm}) => {
     
-
     //form state
     const [valueForm, setValueForm] = useState({
         name:'',
@@ -43,19 +42,28 @@ const RegisterForm = ({setAlert, register, isAuthenticated, setSelectedForm}) =>
     }
     const onSubmit = async e =>{
         e.preventDefault();
-
-        if (password !== password2 && age<18){
-            // toast warning passwords
-            setAlert('Passwords do not match', 'danger');
-            //console.log('passwords not equal or user is too young');
-
-        }else{ //passwords equal & user is old
+        if( age < 18){
+            toast.warning("User too young to use this service");
+            setAlert('user too young', 'danger');
+        }else if(password !== password2){
+            toast.warning("Passwords do not match!!");
+            setAlert('passwords not equal', 'danger');
+        } else {
             register({name, email, password})
         }
     }
 
     // console.log(isAuthenticated);
-    if(isAuthenticated) { return <Redirect to="/layout" />}
+    if(isAuthenticated && user) { 
+        return <Redirect to="/layout" />
+        // return (
+        // <div>
+        //     <h1>{user.data.name}</h1>
+        //     <h2>{user.data.email}</h2>
+        //     <h2>{user.data.password}</h2>
+        // </div>
+        // )
+    }
 
     return (
         
@@ -136,7 +144,7 @@ const RegisterForm = ({setAlert, register, isAuthenticated, setSelectedForm}) =>
                     placeholder='Age' 
                     type="number" 
                     error={formError.age} 
-                    min={18} />
+                />
                 </Form.Field>
                 <Button type='submit' color='blue'>Submit</Button>
             </Form>
@@ -151,13 +159,15 @@ const RegisterForm = ({setAlert, register, isAuthenticated, setSelectedForm}) =>
 RegisterForm.propTypes = {
     setAlert: PropTypes.func.isRequired,
     register: PropTypes.func.isRequired,
-    isAuthenticated: PropTypes.bool
+    isAuthenticated: PropTypes.bool,
+    auth:PropTypes.object.isRequired
    
 }
 
 const mapStateToProps = (state) => ({
     //defining with redux structure
-    isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated,
+    auth:state.auth
 })
 
 export default connect(mapStateToProps, {setAlert, register})(RegisterForm);

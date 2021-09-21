@@ -26,13 +26,13 @@ export const loadUser = (token) =>async dispatch =>{
     }
 
     await axios
-    .get('/api/auth', config)
+    .get('/api/auth/', config)
     .then(response => {
         //dispatch actions
-        console.log(response);
+        console.log('DATA:'+response);
         dispatch({
             type:USER_LOADED,
-            payload:response ///object token
+            payload:response ///object user
         });
     })
     .catch(err => {
@@ -43,18 +43,22 @@ export const loadUser = (token) =>async dispatch =>{
 
 }
 export const register = (data) =>async dispatch => {
-    
+    // header
+    const config = {
+        headers: {
+            'Content-Type':'application/json'
+        }
+    }
     await axios
-    .post('/api/users', data)
+    .post('/api/users/', data, config)
     .then( response => {
         // console.log(response.data.token);
-        let token = response.data.token;
         //dispatch actions
         dispatch({
             type:REGISTER_SUCCESS,
-            payload:token ///object token
+            payload:response.data.token ///object token
         });
-        dispatch(loadUser(token));
+        dispatch(loadUser(response.data.token));
     })
     .catch(err => {
         const errors = err.response.data.errors;
@@ -68,12 +72,35 @@ export const register = (data) =>async dispatch => {
         });
     })
 }
-export const login = () =>async dispatch =>{
-    try {
-        // axios request
-        //dispatch action to the reducer with data
-    } catch (err) {
-        
+export const login = (user) =>async dispatch =>{
+    console.log(user);
+    // header
+    const config = {
+        headers: {
+            'Content-Type':'application/json'
+        }
     }
+    await axios
+    .post("/api/auth/", user, config)
+    .then(response =>{
+        // console.log(response);
+        //dispatch actions
+        dispatch({
+            type:LOGIN_SUCCESS,
+            payload:response.data.token ///object token
+        });
+        dispatch(loadUser(response.data.token));
+    })
+    .catch(err=>{
+        const errors = err.response.data.errors;
+
+        if (errors) {
+            errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+        }
+
+        dispatch({
+            type: AUTH_ERROR
+        });
+    })
 }
 export const logout = () =>async dispatch =>({type:LOGOUT})

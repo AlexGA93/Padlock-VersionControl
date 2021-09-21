@@ -12,7 +12,7 @@ export default function Home(props) {
     return (
         
         <>
-        <Store service={service} user={user} />
+        {/* <Store service={service} user={user} /> */}
         <h1>HOME</h1>
         </>
     )

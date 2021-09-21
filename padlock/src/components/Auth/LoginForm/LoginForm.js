@@ -1,4 +1,6 @@
 import React, {useState, useEffect} from 'react';
+
+import {Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -7,10 +9,10 @@ import "./LoginForm.scss";
 import {Form, Button, Input,Icon} from 'semantic-ui-react';
 import {motion} from 'framer-motion';
 // import {useTransition, animated} from 'react-spring';
-
+import { setAlert } from '../../../actions/alert';
 import { login } from '../../../actions/auth';
 
- const LoginForm = ({login, isAuthenticated, setSelectedForm}) => {
+ const LoginForm = ({auth:{user},login, isAuthenticated, setSelectedForm}) => {
     
     //form state
     const [valueForm, setValueForm] = useState({
@@ -35,9 +37,12 @@ import { login } from '../../../actions/auth';
     }
     const onSubmit = e =>{
         e.preventDefault();
-        login(email, password);
+        login({email, password});
     }
 
+    if(isAuthenticated && user) { 
+        return <Redirect to="/layout" />
+    }
     return (
         <motion.div
         className="register_component"
@@ -93,13 +98,15 @@ import { login } from '../../../actions/auth';
 }
 
 LoginForm.propTypes = {
-    setSelectedForm: PropTypes.func.isRequired,
+    login: PropTypes.func.isRequired,
     isAuthenticated: PropTypes.bool,
+    auth:PropTypes.object.isRequired
 }
 
 const mapStatToProps = state => ({
  //defining with redux structure
- isAuthenticated : state.auth.isAuthenticated
+ isAuthenticated : state.auth.isAuthenticated,
+ auth:state.auth
 })
 
-export default connect(mapStatToProps, {login})(LoginForm);
+export default connect(mapStatToProps, {setAlert, login})(LoginForm);

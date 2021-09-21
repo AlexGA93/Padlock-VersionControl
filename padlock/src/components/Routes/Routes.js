@@ -17,8 +17,7 @@ const Routes = () => {
             {/* <Route exact path="/" component={AuthOptions} /> */}
             <Route exact path="/register" component={RegisterForm} />
             <Route exact path="/login" component={LoginForm} />
-            {/* Not Found */}
-            <Route component={NotFound} />
+            
             
             <PrivateRoute exact path="/layout" component={Loggedlayout} />
             <PrivateRoute exact path="/home" component={Home} />
@@ -27,7 +26,8 @@ const Routes = () => {
             <PrivateRoute exact path="/service/:service_id " component={<h1>view service by id</h1>} />
 
             <PrivateRoute exact path="/user/edit/:id" component={<h1>Edit User</h1>} />
-            
+            {/* Not Found */}
+            <Route component={NotFound} />
         </Switch>
     )
 }
