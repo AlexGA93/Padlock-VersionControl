@@ -8,7 +8,7 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
 // import { Form, FormInput, FormGroup, Button} from "shards-react";
-import {Form, Button, Input,Icon} from 'semantic-ui-react';
+import {Form, Input,Icon} from 'semantic-ui-react';
 import {motion} from 'framer-motion';
 // import {useTransition, animated} from 'react-spring';
 
@@ -146,7 +146,7 @@ const RegisterForm = ({auth:{user},setAlert, register, isAuthenticated, setSelec
                     error={formError.age} 
                 />
                 </Form.Field>
-                <Button type='submit' color='blue'>Submit</Button>
+                <button type='submit' color='blue'>Submit</button>
             </Form>
             <br/><br/><br/>
             <p>
