@@ -14,6 +14,10 @@
             height: 100%;
         }
         button {
+            margin-left: 20px;
+            background-color: $button-primary;
+            border-radius: 5%;
+            color: $font-color;
             width: 150px;
             height: 40px;
             top:100px;
