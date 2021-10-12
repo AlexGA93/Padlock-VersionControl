@@ -38,10 +38,11 @@ import { login } from '../../../actions/auth';
     const onSubmit = e =>{
         e.preventDefault();
         login({email, password});
+       
     }
 
     if(isAuthenticated && user) { 
-        return <Redirect to="/layout" />
+        return <Redirect to="/layout" /> // Redirect to Loggedlayout
     }
     return (
         <motion.div

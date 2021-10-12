@@ -11,7 +11,7 @@ import './AuthOptions.scss';
 
 
 
- const  AuthOptions = ({isAuthenticated, setSelectedForm}) => {
+ const  AuthOptions = ({setSelectedForm}) => {
     
 
 

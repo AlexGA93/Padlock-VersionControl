@@ -26,7 +26,7 @@ const icons = ["shield","plus","edit","eraser","power off"];
 
 
 const labels = ["View Services","Add Service","Edit Service","Delete Service","Log out"];
-const routes = ["/view","/add","/edit","/delete","/logout"]
+const routes = ["/layout","/service/new","/service/edit/:service_id","/delete","/logout"]
 export default function MenuItem(props) {
     const {i} = props;
     
@@ -39,7 +39,7 @@ export default function MenuItem(props) {
           whileTap={{ scale: 0.95 }}
           > 
             
-            <Icon className="motionList__icon-placeholder"name={`${icons[i]}`} size="big" />
+            <Icon className="motionList__icon-placeholder"name={`${icons[i]}`} size="large" />
             {/* <div  className="motionList__icon-placeholder" style={style} >
               
             </div> */}
