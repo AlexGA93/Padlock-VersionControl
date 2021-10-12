@@ -38,8 +38,9 @@ const sidebarVariants = {
     }
   };
 
-export default function Sidebar() {
-
+export default function Sidebar(props) {
+  const {email, name, password} = props;
+  //console.log(name+" "+email+" "+password);
   // we need to define cycles for open and close menu
   const [isOpen, toggleOpen] = useCycle(false, true); // Initially is closed and toggle state is true
   // Define a react mutable value as null

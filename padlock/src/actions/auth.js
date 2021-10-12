@@ -6,9 +6,7 @@ import {
     USER_LOADED,
     AUTH_ERROR,
     LOGIN_SUCCESS,
-    //LOGIN_FAIL,
     LOGOUT,
-    ACCOUNT_DELETED
     } from './types';
 
 // importing axios to make requests
@@ -29,7 +27,7 @@ export const loadUser = (token) =>async dispatch =>{
     .get('/api/auth/', config)
     .then(response => {
         //dispatch actions
-        console.log('DATA:'+response);
+        // console.log('DATA:'+response);
         dispatch({
             type:USER_LOADED,
             payload:response ///object user
@@ -73,7 +71,7 @@ export const register = (data) =>async dispatch => {
     })
 }
 export const login = (user) =>async dispatch =>{
-    console.log(user);
+    // console.log(user);
     // header
     const config = {
         headers: {

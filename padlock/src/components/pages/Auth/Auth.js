@@ -3,6 +3,8 @@ import "./Auth.scss";
 
 import BackgroundAuth from '../../../assets/imgs/background_resize.jpg';
 
+// import { ToastContainer } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
 
 import { Icon } from 'semantic-ui-react';
 import AuthOptions from '../../Auth/AuthOptions/AuthOptions'

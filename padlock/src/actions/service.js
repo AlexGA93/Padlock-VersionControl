@@ -16,5 +16,6 @@ import {
     GET_SERVICES,
     UPDATE_SERVICE,
     SERVICE_DELETED,
-    SERVICE_ERROR
+    SERVICE_ERROR,
+    DELETE_ACCOUNT
 } from './types';
